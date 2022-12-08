@@ -1,1 +1,0 @@
-# ljgroot.github.io
