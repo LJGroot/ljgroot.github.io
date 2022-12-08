@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <title>LJGroot.GitHub.io</title>
 </head>
 <body>
@@ -16,8 +17,19 @@
 <p>- 🌱 I currently use `R`, `Markdown`, `LaTeX`, & `Python`, with varying levels of proficiency.</p>
 
 <p>- 📫 How to reach me: <a class="hiddenMail" data-email="l.j.grootATuvaDOTnl">
-    Show Email
-</a></p>
+    Show Email </a> 
+  $(window).load(function () {
+    $('.hiddenMail').on('click',function(event)
+    {
+        event.preventDefault();
+        $(this).off("click");
+        var email = $(this).attr("data-email").replace(/AT/,'@').replace(/DOT/,'.');
+        $(this).removeClass("hiddenMail");
+        $(this).html(email);
+        $(this).attr("href","mailto:"+email);
+    });
+});
+  </p>
 
   </body>
 </html>
