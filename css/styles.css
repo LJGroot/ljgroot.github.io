@@ -62,21 +62,22 @@
 
 /*  Section 3  */
 .section-heading {
-    text-align: center;
+    text-align: left;
     font-family: Courier New, Courier, monospace;
     color: #543034;
-    margin-top: 40px;
+    padding-left: 40px;
+    margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 /* Sizing for Project Containers  */
 .column-4 {
     float: left;
-    width: 21%;
+    width: 12%;
     padding: 10px;
     margin: 20px;
-    height: 150px;
+    height: 100px;
 }
 
 /* Colors and Hovers for Project Containers  */
@@ -98,7 +99,7 @@
 
 .project-text {
     text-align: center;
-    font-size: 50px;
+    font-size: 20px;
 }
 
 .project-1:hover {
@@ -120,5 +121,5 @@
 /* Add space between sections */
 .section-break {
     margin: 50px;
-    height: 200px;
+    height: 125px;
 }
