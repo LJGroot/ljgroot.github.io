@@ -1,0 +1,25 @@
+h1 {
+    color: #691c62;
+    font-size: 50px;
+    font-family: Courier New, Courier, monospace;
+    text-align: center
+}
+
+h2 {
+    color: #691c62;
+    font-size: 35px;
+    font-family: Courier New, Courier, monospace;
+    text-align: center
+}
+
+p {
+    color: #d83e04;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+
+img {
+    border-radius: 25%;
+    border: 10px solid #FEDE00;
+}
