@@ -1,19 +1,30 @@
-h1 {
-    color: #691c62;
+/*Page Title*/
+.page-title {
+    color: #543034;
     font-size: 50px;
     font-family: Courier New, Courier, monospace;
     text-align: center
 }
 
-h2 {
-    color: #691c62;
+/*Page Subtitle*/
+.page-subtitle {
+    color: #543034;
     font-size: 35px;
     font-family: Courier New, Courier, monospace;
     text-align: center
 }
 
-p {
-    color: #d83e04;
+/*Section Header*/
+.section-header {
+    color: #543034;
+    font-size: 30px;
+    font-family: Courier New, Courier, monospace;
+    text-align: left
+}
+
+/*Header Text*/
+.about-me {
+    color: #0C6279;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
@@ -21,18 +32,93 @@ p {
 
 .portrait-img {
     border-radius: 25%;
-    border: 10px solid #FEDE00;
+    border: 10px solid #543034;
+    margin: 50px;
+    float: right;
 }
 
 .div-1 {
-    background-color: #ffc200; 
-    height:420px; 
-    padding-top:30px; 
-    text-align: center
+    background-color: #DE871D;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    border: 20px solid #0C6279;
+    text-align: center;
 }
 
 .div-2 {
-    background-color: #ffc200; 
-    height: 200px; 
+    background-color: #F2B443;
     padding-top: 10px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.div-3 {
+    background-color: #ffffff;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    border: 20px solid #0C6279;
+    text-align: center;
+}
+
+/*  Section 3  */
+.section-heading {
+    text-align: center;
+    font-family: Courier New, Courier, monospace;
+    color: #543034;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+/* Sizing for Project Containers  */
+.column-4 {
+    float: left;
+    width: 21%;
+    padding: 10px;
+    margin: 20px;
+    height: 150px;
+}
+
+/* Colors and Hovers for Project Containers  */
+.project-1 {
+    background-color: #F2B443;
+}
+
+.project-2 {
+    background-color: #DE871D;
+}
+
+.project-3 {
+    background-color: #0C6279;
+}
+
+.project-4 {
+    background-color: #543034;
+}
+
+.project-text {
+    text-align: center;
+    font-size: 50px;
+}
+
+.project-1:hover {
+    background-color: #B8E6F3;
+}
+
+.project-2:hover {
+    background-color: #B8E6F3;
+}
+
+.project-3:hover {
+    background-color: #B8E6F3;
+}
+
+.project-4:hover {
+    background-color: #B8E6F3;
+}
+
+/* Add space between sections */
+.section-break {
+    margin: 50px;
+    height: 200px;
 }
