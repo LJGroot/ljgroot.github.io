@@ -19,7 +19,20 @@ p {
     text-align: left;
 }
 
-img {
+.portrait-img {
     border-radius: 25%;
     border: 10px solid #FEDE00;
+}
+
+.div-1 {
+    background-color: #ffc200; 
+    height:420px; 
+    padding-top:30px; 
+    text-align: center
+}
+
+.div-2 {
+    background-color: #ffc200; 
+    height: 200px; 
+    padding-top: 10px;
 }
