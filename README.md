@@ -1,8 +1,5 @@
 # ljgroot.github.io
 
-## Welcome to my GitHub Pages site.
+## README
 
-- 👋 Hi, I’m @LJGroot,
-- 👀 I’m interested in Child Develoment & Education, (Meta-Analytical) Structural Equation Modeling, & Rock Climbing 🧗‍♂️.
-- 🌱 I currently use `R`, `Markdown`, `LaTeX`, & `Python`, with varying levels of proficiency.
-- 📫 How to reach me: l.j.groot@uva.nl
+This is a personal profile, potential website, and practicing area for working with markdown and HTML.
