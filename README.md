@@ -2,4 +2,4 @@
 
 ## README
 
-This is a personal profile, potential website, and practicing area for working with markdown and HTML.
+This is a personal profile and practicing area for working with markdown and HTML.
