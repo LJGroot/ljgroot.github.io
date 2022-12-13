@@ -44,6 +44,13 @@ body {
     float: right;
 }
 
+.other-img {
+    border-radius: 5%;
+    border: 10px solid #543034;
+    margin: 50px;
+    float: right;
+}
+
 .div-1 {
     padding-bottom: 10px;
     padding-top: 30px;
