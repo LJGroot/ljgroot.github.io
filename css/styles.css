@@ -1,3 +1,9 @@
+/* General Website Style rules */
+body {
+    font-family: "Helvetica", Sans-Serif;
+    background-image: linear-gradient(#C66E4E 0%, #ffffff 100%);
+}
+
 /*Page Title*/
 .page-title {
     color: #543034;
@@ -38,25 +44,33 @@
 }
 
 .div-1 {
-    background-color: #DE871D;
     padding-bottom: 10px;
     padding-top: 30px;
-    border: 20px solid #0C6279;
+    border: 15px solid #0C6279;
     text-align: center;
 }
 
+.div-nav {
+    float: left;
+    width: 10%;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
 .div-2 {
-    background-color: #F2B443;
+    float: left;
+    width: 35%;
     padding-top: 10px;
     padding-left: 40px;
     padding-bottom: 40px;
 }
 
 .div-3 {
-    background-color: #ffffff;
+    
     padding-bottom: 10px;
     padding-top: 30px;
-    border: 20px solid #0C6279;
+    
     text-align: center;
 }
 
@@ -121,5 +135,5 @@
 /* Add space between sections */
 .section-break {
     margin: 50px;
-    height: 125px;
+    height: 350px;
 }
