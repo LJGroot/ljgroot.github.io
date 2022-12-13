@@ -2,6 +2,7 @@
 body {
     font-family: "Helvetica", Sans-Serif;
     background-image: linear-gradient(#C66E4E 0%, #ffffff 100%);
+    background-repeat: repeat-x;
 }
 
 /*Page Title*/
