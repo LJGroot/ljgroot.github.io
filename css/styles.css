@@ -53,7 +53,7 @@ body {
 
 .div-1 {
     padding-bottom: 10px;
-    padding-top: 30px;
+    padding-top: 10px;
     border: 15px solid #0C6279;
     text-align: center;
 }
@@ -98,27 +98,27 @@ body {
 /* Sizing for Project Containers  */
 .column-4 {
     float: left;
-    width: 12%;
+    width: 90px;
     padding: 10px;
     margin: 20px;
-    height: 100px;
+    height: 90px;
 }
 
 /* Colors and Hovers for Project Containers  */
 .project-1 {
-    background-color: #F2B443;
+    background-color: #C66E4E;
 }
 
 .project-2 {
-    background-color: #DE871D;
+    background-color: #C66E4E;
 }
 
 .project-3 {
-    background-color: #0C6279;
+    background-color: #C66E4E;
 }
 
 .project-4 {
-    background-color: #543034;
+    background-color: #C66E4E;
 }
 
 .project-text {
@@ -127,19 +127,19 @@ body {
 }
 
 .project-1:hover {
-    background-color: #B8E6F3;
+    background-color: #0C6279;
 }
 
 .project-2:hover {
-    background-color: #B8E6F3;
+    background-color: #0C6279;
 }
 
 .project-3:hover {
-    background-color: #B8E6F3;
+    background-color: #0C6279;
 }
 
 .project-4:hover {
-    background-color: #B8E6F3;
+    background-color: #0C6279;
 }
 
 /* Add space between sections */
