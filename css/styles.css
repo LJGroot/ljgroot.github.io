@@ -62,11 +62,9 @@ body {
     float: left;
     width: 10%;
     font-size: 30px;
-    line-height: 1.3;
-    padding-top: 40px;
+    line-height: 1.2;
     padding-left: 20px;
-    padding-bottom: 40px;
-    padding-right: 40px;
+    border: 5px inset;
 }
 .div-2 {
     float: left;
