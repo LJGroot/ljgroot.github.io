@@ -1,45 +1,45 @@
 /* General Website Style rules */
 body {
     font-family: "Helvetica", Sans-Serif;
-    background-image: linear-gradient(#C66E4E 0%, #ffffff 100%);
+    background-image: linear-gradient(#1b449f 0%, #ffffff 100%);
     background-repeat: repeat-x;
 }
-
+ 
 /*Page Title*/
 .page-title {
-    color: #543034;
+    color: darkslateblue;
     font-size: 50px;
-    font-family: Courier New, Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center
 }
 
 /*Page Subtitle*/
 .page-subtitle {
-    color: #543034;
+    color: darkslateblue;
     font-size: 35px;
-    font-family: Courier New, Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center
 }
 
 /*Section Header*/
 .section-header {
-    color: #543034;
+    color: darkslateblue;
     font-size: 30px;
-    font-family: Courier New, Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left
 }
 
 /*Header Text*/
 .about-me {
-    color: #0C6279;
+    color: darkslateblue;
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
 }
 
 .portrait-img {
-    border-radius: 25%;
-    border: 10px solid #543034;
+    border-radius: 25px 0 25px 0;
+    border: 5px solid darkslateblue;
     margin: 50px;
     float: right;
 }
@@ -60,7 +60,6 @@ body {
 
 .div-nav {
     float: left;
-
     font-size: 20px;
     line-height: 1.2;
     padding-left: 10px;
@@ -86,7 +85,7 @@ body {
 /*  Section 3  */
 .section-heading {
     text-align: left;
-    font-family: Courier New, Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
     color: #543034;
     padding-left: 40px;
     margin-top: 10px;
