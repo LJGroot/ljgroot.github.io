@@ -119,6 +119,10 @@ body {
     background-color: steelblue;
 }
 
+.project-5 {
+    background-color: steelblue;
+}
+
 .project-text {
     color: darkslategrey;
     text-align: center;
@@ -141,6 +145,9 @@ body {
     background-color: lightsteelblue;
 }
 
+.project-5:hover {
+    background-color: lightsteelblue;
+}
 /* Add space between sections */
 .section-break {
     margin: 50px;
