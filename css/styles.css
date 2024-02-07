@@ -105,6 +105,7 @@ body {
 /* Colors and Hovers for Project Containers  */
 .project-1 {
     background-color: steelblue;
+    border-radius: 10px;
 }
 
 .project-2 {
