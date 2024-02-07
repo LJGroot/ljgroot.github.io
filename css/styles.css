@@ -1,7 +1,7 @@
 /* General Website Style rules */
 body {
     font-family: "Helvetica", Sans-Serif;
-    background-image: linear-gradient(coral 0%, #ffffff 100%);
+    background-image: linear-gradient(#FF7F50 0%, #ffffff 100%);
     background-repeat: repeat-x;
 }
  
