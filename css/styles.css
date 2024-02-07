@@ -82,6 +82,14 @@ body {
     text-align: center;
 }
 
+.div-4 {
+    float: left;
+    width: 55%;
+    padding-top: 10px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
 /*  Section 3  */
 .section-heading {
     text-align: left;
