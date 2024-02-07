@@ -39,7 +39,7 @@ body {
 
 .portrait-img {
     border-radius: 25px 0 25px 0;
-    border: 5px solid darkslateblue;
+    border: 5px solid steelblue;
     margin: 50px;
     float: right;
 }
@@ -54,7 +54,7 @@ body {
 .div-1 {
     padding-bottom: 10px;
     padding-top: 10px;
-    border: 15px solid #0C6279;
+    border: 15px solid steelblue;
     text-align: center;
 }
 
@@ -104,40 +104,41 @@ body {
 
 /* Colors and Hovers for Project Containers  */
 .project-1 {
-    background-color: #0C6279;
+    background-color: steelblue;
 }
 
 .project-2 {
-    background-color: #0C6279;
+    background-color: steelblue;
 }
 
 .project-3 {
-    background-color: #0C6279;
+    background-color: #steelblue;
 }
 
 .project-4 {
-    background-color: #0C6279;
+    background-color: #steelblue;
 }
 
 .project-text {
+    color: darkslategrey;
     text-align: center;
     font-size: 20px;
 }
 
 .project-1:hover {
-    background-color: #0C6279;
+    background-color: lightsteelblue;
 }
 
 .project-2:hover {
-    background-color: #0C6279;
+    background-color: lightsteelblue;
 }
 
 .project-3:hover {
-    background-color: #0C6279;
+    background-color: lightsteelblue;
 }
 
 .project-4:hover {
-    background-color: #0C6279;
+    background-color: lightsteelblue;
 }
 
 /* Add space between sections */
