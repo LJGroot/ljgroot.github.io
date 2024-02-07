@@ -60,6 +60,7 @@ body {
 
 .div-nav {
     float: left;
+    width: 15%;
     font-size: 26px;
     line-height: 1.8;
     padding-left: 10px;
