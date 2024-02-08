@@ -54,6 +54,7 @@ body {
 .div-1 {
     padding-bottom: 10px;
     padding-top: 10px;
+    background-image: url("./images/path-model.png");
     border: 15px solid steelblue;
     text-align: center;
 }
