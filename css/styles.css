@@ -55,7 +55,7 @@ body {
     padding-bottom: 10px;
     padding-top: 10px;
     background-image: url("../images/path-model-tilt.png");
-    background-size: auto;
+    background-size: 100% auto;
     background-repeat: no-repeat;
     opacity: 0.6;
     border: 15px solid steelblue;
