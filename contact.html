@@ -70,23 +70,36 @@
             color: #6a11cb;
             font-size: 1.8rem;
             font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
-        .contact-links {
-            margin-top: 1rem;
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
-        .contact-links a {
+        .contact-button {
             display: inline-block;
-            margin: 0.5rem 0;
-            color: #2575fc;
-            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             text-decoration: none;
+            font-size: 1rem;
             font-weight: 500;
+            color: white;
+            background-color: #2575fc;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .contact-links a:hover {
-            color: #6a11cb;
+        .contact-button:hover {
+            background-color: #6a11cb;
+            transform: translateY(-3px);
+        }
+
+        .contact-button:active {
+            transform: translateY(1px);
         }
 
         footer {
@@ -102,7 +115,7 @@
 <body>
     <div class="wrapper">
         <header>
-            <h1 class="header-title">Contact Me</h1>
+            <h1 class="header-title">Contact</h1>
         </header>
 
         <nav>
@@ -115,12 +128,12 @@
 
         <div class="container">
             <h2 class="section-header">Where to Find Me</h2>
-            <div class="contact-links">
-                <p><a href="https://www.linkedin.com/in/lennert-groot/" target="_blank">LinkedIn</a></p>
-                <p><a href="https://github.com/LJGroot" target="_blank">GitHub</a></p>
-                <p><a href="https://orcid.org/0000-0002-8711-6086" target="_blank">ORCID</a></p>
-                <p><a href="https://osf.io/zwbha/" target="_blank">OSF</a></p>
-                <p><a href="https://cde.uva.nl/profile/g/r/l.j.groot/l.j.groot.html" target="_blank">UvA</a></p>
+            <div class="button-container">
+                <a class="contact-button" href="https://www.linkedin.com/in/lennert-groot/" target="_blank">LinkedIn</a>
+                <a class="contact-button" href="https://github.com/LJGroot" target="_blank">GitHub</a>
+                <a class="contact-button" href="https://orcid.org/0000-0002-8711-6086" target="_blank">ORCID</a>
+                <a class="contact-button" href="https://osf.io/zwbha/" target="_blank">OSF</a>
+                <a class="contact-button" href="https://cde.uva.nl/profile/g/r/l.j.groot/l.j.groot.html" target="_blank">UvA</a>
             </div>
         </div>
     </div>
