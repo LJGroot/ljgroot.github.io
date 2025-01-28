@@ -2,43 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Publications | LJGroot.GitHub.io</title>
+    <title>LJGroot.GitHub.io - Publications</title>
     <link rel="shortcut icon" type="image/jpg" href="images/favicon.ico">
-    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
+        body {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
             color: #333;
             background-color: #f9f9f9;
         }
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
         header {
             background: linear-gradient(90deg, #6a11cb, #2575fc);
             color: white;
             padding: 1rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-
         .header-title {
             font-size: 2rem;
             font-weight: 600;
             margin: 0;
         }
-
         nav {
             display: flex;
             justify-content: center;
@@ -47,61 +35,50 @@
             background-color: white;
             border-bottom: 1px solid #eee;
         }
-
         nav a {
             color: #2575fc;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-
         nav a:hover {
             color: #6a11cb;
         }
-
         .container {
             max-width: 800px;
             margin: 2rem auto;
             padding: 1rem;
         }
-
         .section-header {
-            color: #6a11cb;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 600;
+            color: #2575fc;
             text-align: center;
             margin-bottom: 1rem;
         }
-
-        .publication-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .publication-list li {
-            margin-bottom: 1.5rem;
-            background: #f1f1f1;
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .publication-title {
-            font-size: 1.2rem;
+        .publication-year {
+            font-size: 1.5rem;
             font-weight: 600;
-            color: #333;
-            margin: 0;
+            color: #6a11cb;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
-
-        .publication-meta {
-            color: #666;
-            font-size: 0.9rem;
+        .publication {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
-
+        a {
+            color: #6a11cb;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
         footer {
+            margin-top: 2rem;
+            padding: 1rem;
             background-color: #f1f1f1;
             text-align: center;
-            padding: 1rem;
             font-size: 0.9rem;
             color: #666;
         }
@@ -109,43 +86,47 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <header>
-            <h1 class="header-title">Publications</h1>
-        </header>
+    <header>
+        <h1 class="header-title"><a href="index.html" style="text-decoration: none; color: white;">LJGroot.GitHub.io</a></h1>
+    </header>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about-me.html">About Me</a>
-            <a href="my-research.html">My Research</a>
-            <a href="publications.html">Publications</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about-me.html">About Me</a>
+        <a href="my-research.html">My Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-        <div class="container">
-            <h2 class="section-header">My Published Work</h2>
-            <ul class="publication-list">
-                <li>
-                    <p class="publication-title">Title of Publication 1</p>
-                    <p class="publication-meta">Authors: Author A, Author B, Author C | Published: 2023</p>
-                    <p><a href="#" style="color: #2575fc; text-decoration: none;">View Publication</a></p>
-                </li>
-                <li>
-                    <p class="publication-title">Title of Publication 2</p>
-                    <p class="publication-meta">Authors: Author A, Author B, Author C | Published: 2022</p>
-                    <p><a href="#" style="color: #2575fc; text-decoration: none;">View Publication</a></p>
-                </li>
-                <li>
-                    <p class="publication-title">Title of Publication 3</p>
-                    <p class="publication-meta">Authors: Author A, Author B, Author C | Published: 2021</p>
-                    <p><a href="#" style="color: #2575fc; text-decoration: none;">View Publication</a></p>
-                </li>
-            </ul>
+    <div class="container">
+        <h2 class="section-header">Publications</h2>
+
+        <h3 class="publication-year">2024</h3>
+        <div class="publication">
+            <a href="https://www.mdpi.com/2079-3200/12/2/18" target="_blank">
+                <strong>Why Do Bi-Factor Models Outperform Higher-Order g Factor Models? A Network Perspective.</strong> (2024)
+            </a>
+            <p>
+                Kan, K.J., Psychogiopoulos, A., Groot, L.J., De Jonge, H., & Ten Hove, D.<br>
+                <em>Journal of Intelligence, 12</em>(2), 18.<br>
+                DOI: <a href="https://doi.org/10.3390/jintelligence12020018" target="_blank">https://doi.org/10.3390/jintelligence12020018</a>
+            </p>
+        </div>
+
+        <div class="publication">
+            <a href="https://onlinelibrary.wiley.com/doi/10.1002/jrsm.1735" target="_blank">
+                <strong>Checking the inventory: Illustrating different methods for individual participant data meta-analytic structural equation modeling.</strong> (2024)
+            </a>
+            <p>
+                Groot, L.J., Kan, K.J., & Jak, S.<br>
+                <em>Research Synthesis Methods, 15</em>(6), pp. 872-895.<br>
+                DOI: <a href="https://doi.org/10.1002/jrsm.1735" target="_blank">https://doi.org/10.1002/jrsm.1735</a>
+            </p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 LJ Groot | ljgroot.github.io</p>
+        <p>&copy; 2025 LJ Groot | ljgroot.github.io</p>
     </footer>
 </body>
 </html>
