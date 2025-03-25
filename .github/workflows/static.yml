@@ -33,10 +33,6 @@ jobs:
         with:
           name: github-pages
           path: '.'
-          exclude: |
-            .git/*
-            .github/*
-            node_modules/*
 
 
       - name: Deploy to GitHub Pages
