@@ -151,7 +151,12 @@
     </div>
 
     <footer>
-       <p>&copy; 2026 L.J. Groot | <a href="ljgroot.github.io" style="color: #6a11cb;">ljgroot.github.io</p>
+        <p>&copy; <span id="current-year"></span> L.J. Groot | <a href="ljgroot.github.io" style="color: #6a11cb;">ljgroot.github.io</p>
     </footer>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+    
 </body>
 </html>
