@@ -70,6 +70,12 @@ nav a:hover {
     color: #6a11cb;
 }
 
+nav a.active {
+  font-weight: 700;
+  border-bottom: 2px solid currentColor;
+  color: #000;
+}
+
 /* Container Styles */
 .div-1 {
     padding: 1rem;
