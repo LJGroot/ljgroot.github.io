@@ -3,120 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title>Contact | LJGroot.GitHub.io</title>
+
+    <!-- Viewport for responsive behavior -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="shortcut icon" type="image/jpg" href="images/favicon.ico">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!--<style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: linear-gradient(90deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .header-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            padding: 1rem;
-            background-color: white;
-            border-bottom: 1px solid #eee;
-        }
-
-        nav a {
-            color: #2575fc;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #6a11cb;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .section-header {
-            color: #6a11cb;
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .contact-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
-            background-color: #2575fc;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-button:hover {
-            background-color: #6a11cb;
-            transform: translateY(-3px);
-        }
-
-        .contact-button:active {
-            transform: translateY(1px);
-        }
-
-        footer {
-            background-color: #f1f1f1;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>-->
 </head>
 
 <body>
     <div class="wrapper">
         <header>
-            <h1 class="header-title"><a href="index.html" style="text-decoration: none; color: white;">Lennert J. Groot</a></h1>
+            <h1 class="header-title">
+                <a href="index.html" style="text-decoration: none; color: white;">Lennert J. Groot</a>
+            </h1>
         </header>
 
         <nav>
@@ -151,8 +52,13 @@
         </div>
     </div>
 
-    <footer>
-        <p>&copy; <span id="current-year"></span> L.J. Groot | <a href="ljgroot.github.io" style="color: #6a11cb;">ljgroot.github.io</p>
+ <footer class="footer">
+        <p>
+            &copy; <span id="current-year"></span> L.J. Groot |
+            <a href="https://ljgroot.github.io/" style="color: #6a11cb;">
+                ljgroot.github.io
+            </a>
+        </p>
     </footer>
 
 <script>
