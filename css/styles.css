@@ -5,13 +5,19 @@
     box-sizing: border-box;
 }
 
-/* General Website Style rules */
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(90deg, #f9f9f9, #e0e0f6);
+html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
     color: #333;
+    background: linear-gradient(90deg, #f9f9f9, #e0e0f6);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Page Title */
@@ -97,22 +103,6 @@ nav a.active {
     border-bottom: 2px solid currentColor;
     padding-bottom: 0.15rem;
     color: #2575fc;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    background-color: #f9f9f9;
-}
-
-/* Make the page use flex layout to push footer to bottom */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
 /* Main content wrapper grows to fill space above footer */
