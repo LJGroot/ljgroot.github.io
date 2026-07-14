@@ -55,6 +55,21 @@ body {
     max-width: 100%;
 }
 
+.research-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.research-images img {
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+}
+
 /* Navigation Bar */
 nav {
     background-color: white;
