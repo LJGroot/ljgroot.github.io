@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <!-- NEW: viewport for responsive behavior -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Lennert J. Groot</title>
     <link rel="shortcut icon" type="image/jpg" href="images/favicon.ico">
+
+    <!-- External stylesheet (with responsive rules we discussed) -->
     <link rel="stylesheet" href="css/styles.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <meta name="description" content="Personal and academic homepage of Lennert J. Groot. Research, CV, publications, and contact information.">
     <meta name="author" content="Lennert J. Groot">
     <link rel="canonical" href="https://ljgroot.github.io/">
@@ -15,6 +22,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ljgroot.github.io/">
     
+    <!-- Page-specific styles (optional: can be moved into styles.css) -->
     <style>
         html, body {
             height: 100%;
@@ -49,8 +57,6 @@
             font-weight: 600;
             margin: 0;
         }
-
-
 
         .container {
             max-width: 800px;
@@ -96,21 +102,41 @@
         <div class="container">
             <h2>Welcome to My Home Page</h2>
             <p class="about-me">👋 Hi, I'm Lennert,</p>
-            <p class="about-me">🎓 I'm a postdoc researcher at <a href="https://ascor.uva.nl/" target="_blank" style="color: #6a11cb;">ASCOR</a>, at the University of Amsterdam.</p>
-            <p class="about-me">👀 I'm interested in Psychometrics, MASEM, Open Science, Data Donation, & Rock Climbing 🧗.</p>
-            <p class="about-me">🌱 I currently use R, Markdown/Bookdown, Quarto, LaTeX, HTML/CSS, & Python, with varying levels of proficiency. 
-                Click here to check out <a href="https://github.com/LJGroot" target="_blank" style="color: #6a11cb;"> my GitHub</a></p>
-            <p class="about-me">📫 How to reach me: email me at l.j.groot[AT]uva[DOT]nl, lg90[AT]duck[DOT]com or <a href="contact.html" style="color: #6a11cb;">find me online</a>.</p>
+            <p class="about-me">
+                🎓 I'm a postdoc researcher at 
+                <a href="https://ascor.uva.nl/" target="_blank" rel="noopener noreferrer" style="color: #6a11cb;">
+                    ASCOR
+                </a>, at the University of Amsterdam.
+            </p>
+            <p class="about-me">
+                👀 I'm interested in Psychometrics, MASEM, Open Science, Data Donation, & Rock Climbing 🧗.
+            </p>
+            <p class="about-me">
+                🌱 I currently use R, Markdown/Bookdown, Quarto, LaTeX, HTML/CSS, & Python, with varying levels of proficiency. 
+                Click here to check out 
+                <a href="https://github.com/LJGroot" target="_blank" rel="noopener noreferrer" style="color: #6a11cb;">
+                    my GitHub
+                </a>.
+            </p>
+            <p class="about-me">
+                📫 How to reach me: email me at l.j.groot[AT]uva[DOT]nl, lg90[AT]duck[DOT]com or 
+                <a href="contact.html" style="color: #6a11cb;">find me online</a>.
+            </p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> L.J. Groot | <a href="ljgroot.github.io" style="color: #6a11cb;">ljgroot.github.io</p>
+        <p>
+            &copy; <span id="current-year"></span> L.J. Groot |
+            <!-- FIXED: close the <a> and use full URL -->
+            <a href="https://ljgroot.github.io/" style="color: #6a11cb;">
+                ljgroot.github.io
+            </a>
+        </p>
     </footer>
 
-<script>
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
-    
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
