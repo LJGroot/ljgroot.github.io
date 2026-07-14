@@ -84,6 +84,51 @@ nav a.active {
     color: #2575fc;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f9f9f9; /* or keep your gradient if you prefer */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* If you want landing page-specific portrait styling: */
+.portrait-img {
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Container Styles */
 .div-1 {
     padding: 1rem;
