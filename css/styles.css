@@ -182,16 +182,19 @@ header {
 
 /*Publications*/
 .publication-year {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #6a11cb;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #6a11cb;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    max-width: 800px;
+}
 
 .publication {
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    max-width: 800px;
+    text-align: justify;
 }
 
 /* Contact Page Specific */
