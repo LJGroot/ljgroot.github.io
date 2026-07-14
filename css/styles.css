@@ -1,3 +1,10 @@
+/* NEW: Make widths include padding and borders, to avoid overflow issues */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* General Website Style rules */
 body {
     font-family: 'Poppins', sans-serif;
@@ -71,10 +78,10 @@ nav a:hover {
 }
 
 nav a.active {
-  font-weight: 700;
-  border-bottom: 2px solid currentColor;
-  padding-bottom: 0.15rem;
-  color: #2575fc;
+    font-weight: 700;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 0.15rem;
+    color: #2575fc;
 }
 
 /* Container Styles */
@@ -135,11 +142,12 @@ nav a.active {
 }
 
 /* Grid Containers */
+/* NEW: Remove horizontal margins so 100% width doesn't overflow */
 .column-4 {
     float: left;
     width: 100%;
     padding: 1rem;
-    margin: 1rem;
+    margin: 1rem 0;
     text-align: center;
 }
 
@@ -168,4 +176,98 @@ nav a.active {
     font-size: 0.9rem;
     color: #666;
     border-top: 1px solid #ddd;
+}
+
+/* ============================= */
+/* NEW: Responsive layout tweaks */
+/* ============================= */
+
+/* Slightly adjust typography on medium screens */
+@media (max-width: 1024px) {
+    .page-title {
+        font-size: 2.1rem;
+    }
+
+    .section-header {
+        font-size: 1.7rem;
+    }
+}
+
+/* Tablet and small laptop: stack sidebar/content, adjust images and nav */
+@media (max-width: 768px) {
+    /* Stack sidebar and main content instead of side-by-side */
+    .div-nav,
+    .div-4 {
+        float: none;
+        width: 100%;
+        margin: 0 0 1.5rem 0;
+    }
+
+    /* Images centered, not squeezed against the side */
+    .portrait-img,
+    .other-img {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        max-width: 80%;
+    }
+
+    /* Navigation wraps nicely on smaller widths */
+    nav {
+        flex-wrap: wrap;
+        padding: 0.75rem 0;
+        gap: 0.75rem;
+    }
+
+    nav a {
+        font-size: 0.95rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        margin: 0.75rem 0;
+    }
+
+    .section-header {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .about-me {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .div-1 {
+        padding: 0.75rem;
+    }
+
+    .footer {
+        font-size: 0.85rem;
+        padding: 0.75rem;
+    }
+}
+
+/* Very small screens (phones) */
+@media (max-width: 480px) {
+    /* Make nav links full-width so they’re easy to tap */
+    nav a {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    /* Allow images to be fully responsive */
+    .portrait-img,
+    .other-img {
+        max-width: 100%;
+        margin: 0.75rem auto;
+    }
+
+    .page-title {
+        font-size: 1.6rem;
+    }
+
+    .section-header {
+        font-size: 1.3rem;
+    }
 }
