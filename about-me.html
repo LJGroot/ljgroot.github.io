@@ -4,78 +4,19 @@
     <meta charset="utf-8">
     <title>LJGroot.GitHub.io - About Me</title>
 
+    <!-- NEW: viewport for responsive layout on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-
-        /* Ensure the body uses Flexbox */
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Main content wrapper */
-        .wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: linear-gradient(90deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .header-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-
-
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .about-me {
-            line-height: 1.8;
-            font-size: 1rem;
-            text-align: justify;
-        }
-
-        .portrait-img {
-            border-radius: 1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        footer {
-            background-color: #f1f1f1;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
 </head>
 
 <body>
-    
     <header>
-        <h1 class="header-title"><a href="index.html" style="text-decoration: none; color: white;">Lennert J. Groot</a></h1>
+        <h1 class="header-title">
+            <a href="index.html" style="text-decoration: none; color: white;">Lennert J. Groot</a>
+        </h1>
     </header>
 
     <nav>
@@ -106,18 +47,24 @@
         </p>
 
         <p class="about-me">
-        <a href="https://ljgroot.github.io/resume/resume.html">View My Resume</a>
+            <a href="https://ljgroot.github.io/resume/resume.html">View My Resume</a>
         </p>
     
         <img src="images/portrait-2.png" height="250" alt="Portrait of author" class="portrait-img">
     </div>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> L.J. Groot | <a href="ljgroot.github.io" style="color: #6a11cb;">ljgroot.github.io</p>
+        <p>
+            &copy; <span id="current-year"></span> L.J. Groot |
+            <!-- FIXED: full URL + properly closed <a> -->
+            <a href="https://ljgroot.github.io/" style="color: #6a11cb;">
+                ljgroot.github.io
+            </a>
+        </p>
     </footer>
 
-<script>
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
