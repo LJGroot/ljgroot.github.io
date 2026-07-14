@@ -180,6 +180,20 @@ header {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/*Publications*/
+.publication-year {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #6a11cb;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+.publication {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
 /* Contact Page Specific */
 .contact-links {
     display: grid;
