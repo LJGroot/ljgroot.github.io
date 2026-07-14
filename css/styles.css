@@ -204,6 +204,35 @@ header {
     font-size: 1.1rem;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: #2575fc;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-button:hover {
+    background-color: #6a11cb;
+    transform: translateY(-3px);
+}
+
+.contact-button:active {
+    transform: translateY(1px);
+}
+
 /* Grid Containers */
 /* NEW: Remove horizontal margins so 100% width doesn't overflow */
 .column-4 {
