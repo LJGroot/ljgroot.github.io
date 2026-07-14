@@ -95,12 +95,12 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;   /* at least full viewport height */
 }
 
+/* Main content area grows to fill available space */
 .wrapper {
     flex: 1;
-    display: flex;
-    flex-direction: column;
 }
 
 header {
@@ -114,6 +114,18 @@ header {
     font-size: 2rem;
     font-weight: 600;
     margin: 0;
+}
+
+/* Footer */
+.footer {
+    /*margin-top: 2rem;*/
+    margin-top: auto;
+    padding: 1rem;
+   /* background-color: #f1f1f1;*/
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid #ddd;
 }
 
 .container {
@@ -216,18 +228,6 @@ header {
 .project-5:hover {
     background-color: #f0f4ff;
     cursor: pointer;
-}
-
-/* Footer */
-.footer {
-    /*margin-top: 2rem;*/
-    margin-top: auto;
-    padding: 1rem;
-   /* background-color: #f1f1f1;*/
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
-    border-top: 1px solid #ddd;
 }
 
 /* ============================= */
