@@ -105,6 +105,42 @@ nav a.active {
     color: #2575fc;
 }
 
+.nav-toggle {
+    display: none;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem auto;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .nav-toggle {
+        display: block;       /* show button on small screens */
+    }
+
+    nav {
+        display: none;        /* hide nav by default */
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
+    nav.open {
+        display: flex;        /* show when toggled */
+    }
+
+    nav a {
+        flex: 0 0 auto;
+        font-size: 0.95rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
 /* Main content wrapper grows to fill space above footer */
 .wrapper {
     flex: 1;
