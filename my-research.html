@@ -13,63 +13,86 @@
     <link rel="stylesheet" href="css/polish.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
 </head>
 
 <body>
     <div class="wrapper">
-    <header>
-        <h1 class="header-title"><a href="index.html" style="text-decoration: none; color: white;">Lennert J. Groot</a></h1>
-    </header>
+        <header>
+            <h1 class="header-title">
+                <a href="index.html" style="text-decoration: none; color: white;">Lennert J. Groot</a>
+            </h1>
+        </header>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about-me.html">About Me</a>
-        <a href="my-research.html" class="active">My Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+        <!-- Menu button for small screens -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+            Menu
+        </button>
 
-    <div class="container">
-        <h2 class="section-header">PhD Research</h2>
-        <p class="about-me">
-            I wrote my dissertation as a PhD candidate in the research project <b>'No Data Left Behind: New meta-analytic structural equation models for complex data structures'</b>.
-            This project was funded through the VIDI grant awarded to 
-            <a href="https://www.uva.nl/profiel/j/a/s.jak/s.jak.html" target="_blank">dr. Suzanne Jak</a>.
-            In this project, we aimed to broaden the scope of research questions that can be answered through meta-analytical structural equation modeling (MASEM).
-            In particular, I investigated the possibilities of synthesizing raw datasets, instead of summary statistics, when conducting MASEM.
-            Working on techniques for IPD MASEM, is an effort to allow researchers to synthesize these growing data archives to answer the most complex research questions.
-        </p>
-        
-        <h2 class="section-header">Postdoctoral Research</h2>
-        <p class="about-me">
-            In my current postdoctoral research position I work on the <b>Media and Web Diets Observatory</b> (a part of the 
-            <a href="https://www.uva.nl/en/shared-content/faculteiten/en/faculteit-der-maatschappij-en-gedragswetenschappen/news/2025/11/macroscope.html">Macroscope</a> project), 
-            supervised by prof. dr. Theo Araujo and prof. dr. Jessica Piotrowski.
-            In this project, I am again working with large heterogeneous data sets and thinking how these can be used to answer a wide range of research question.
-            For the Observatory, we will be using data donation procedures to create a representative, longitudinal dataset of thousands of individuals, 
-            linking meso-level public debate and micro-level attitudes and behaviors to participants (social) media consumption. 
-            Future scholars and students can use this data to connect the dots between what we consume online and how attitudes and behaviors change over time.
-        </p>
+        <!-- Nav with id so CSS + JS can target it -->
+        <nav id="site-nav">
+            <a href="index.html">Home</a>
+            <a href="about-me.html">About Me</a>
+            <a href="my-research.html" class="active">My Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="contact.html">Contact</a>
+        </nav>
 
-        <div class="research-images">
-            <img src="images/macroscope-logo.png" alt="Macroscope Logo">
-            <!--<img src="images/path-model-full.png" alt="Image of a path model">-->
+        <div class="container">
+            <h2 class="section-header">PhD Research</h2>
+            <p class="about-me">
+                I wrote my dissertation as a PhD candidate in the research project 
+                <b>'No Data Left Behind: New meta-analytic structural equation models for complex data structures'</b>.
+                This project was funded through the VIDI grant awarded to 
+                <a href="https://www.uva.nl/profiel/j/a/s.jak/s.jak.html" target="_blank" rel="noopener noreferrer">dr. Suzanne Jak</a>.
+                In this project, we aimed to broaden the scope of research questions that can be answered through meta-analytical structural equation modeling (MASEM).
+                In particular, I investigated the possibilities of synthesizing raw datasets, instead of summary statistics, when conducting MASEM.
+                Working on techniques for IPD MASEM is an effort to allow researchers to synthesize these growing data archives to answer the most complex research questions.
+            </p>
+            
+            <h2 class="section-header">Postdoctoral Research</h2>
+            <p class="about-me">
+                In my current postdoctoral research position I work on the <b>Media and Web Diets Observatory</b> (a part of the 
+                <a href="https://www.uva.nl/en/shared-content/faculteiten/en/faculteit-der-maatschappij-en-gedragswetenschappen/news/2025/11/macroscope.html" target="_blank" rel="noopener noreferrer">Macroscope</a> project), 
+                supervised by prof. dr. Theo Araujo and prof. dr. Jessica Piotrowski.
+                In this project, I am again working with large heterogeneous data sets and considering how these can be used to answer a wide range of research questions.
+                For the Observatory, we will be using data donation procedures to create a representative, longitudinal dataset of thousands of individuals, 
+                linking meso-level public debate and micro-level attitudes and behaviors to participants’ (social) media consumption. 
+                Future scholars and students can use this data to connect the dots between what we consume online and how attitudes and behaviors change over time.
+            </p>
+
+            <div class="research-images">
+                <img src="images/macroscope-logo.png" alt="Macroscope Logo">
+                <!-- <img src="images/path-model-full.png" alt="Image of a path model"> -->
+            </div>
         </div>
-    </div>
     </div>
 
     <footer class="footer">
         <p>
             &copy; <span id="current-year"></span> L.J. Groot |
-            <a href="ljgroot.github.io" style="color: #6a11cb;">
+            <a href="https://ljgroot.github.io" style="color: #6a11cb;">
                 ljgroot.github.io
             </a>
         </p>
     </footer>
 
-<script>
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
+    <script>
+      // Toggle the mobile menu (same pattern as other pages)
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('site-nav');
+
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      // Set current year in footer
+      const yearSpan = document.getElementById('current-year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    </script>
 </body>
 </html>
