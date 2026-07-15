@@ -24,14 +24,30 @@
     <meta property="og:url" content="https://ljgroot.github.io/">
     
 </head>
+    
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('site-nav');
 
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+</script>
+    
 <body>
     <div class="wrapper">
         <header>
             <h1 class="header-title">Lennert J. Groot</h1>
         </header>
 
-        <nav>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+            Menu
+        </button>
+
+        <nav id="site-nav">
             <a href="index.html" class="active">Home</a>
             <a href="about-me.html">About Me</a>
             <a href="my-research.html">My Research</a>
