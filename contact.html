@@ -23,7 +23,13 @@
             </h1>
         </header>
 
-        <nav>
+        <!-- Menu button for small screens -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+            Menu
+        </button>
+
+        <!-- Nav with id so CSS + JS can target it -->
+        <nav id="site-nav">
             <a href="index.html">Home</a>
             <a href="about-me.html">About Me</a>
             <a href="my-research.html">My Research</a>
@@ -31,55 +37,55 @@
             <a href="contact.html" class="active">Contact</a>
         </nav>
 
-<div class="container">
-    <h2 class="section-header">Where to Find Me</h2>
+        <div class="container">
+            <h2 class="section-header">Where to Find Me</h2>
 
-    <!-- Row 1 -->
-    <div class="button-container">
-        <a class="contact-button" href="https://www.linkedin.com/in/lennert-groot/" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-        </a>
-        <a class="contact-button" href="https://github.com/LJGroot" target="_blank" rel="noopener noreferrer">
-            GitHub
-        </a>
+            <!-- Row 1 -->
+            <div class="button-container">
+                <a class="contact-button" href="https://www.linkedin.com/in/lennert-groot/" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                </a>
+                <a class="contact-button" href="https://github.com/LJGroot" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            </div>
+
+            <p> </p>
+
+            <!-- Row 2 -->
+            <div class="button-container">
+                <a class="contact-button" href="https://orcid.org/0000-0002-8711-6086" target="_blank" rel="noopener noreferrer">
+                    ORCID
+                </a>
+                <a class="contact-button" href="https://osf.io/zwbha/" target="_blank" rel="noopener noreferrer">
+                    OSF
+                </a>
+            </div>
+
+            <p> </p>
+
+            <!-- Row 3 -->
+            <div class="button-container">
+                <a class="contact-button" href="https://www.uva.nl/en/profile/g/r/l.j.groot/l.j.groot.html" target="_blank" rel="noopener noreferrer">
+                    UvA
+                </a>
+                <a class="contact-button" href="https://scholar.google.com/citations?user=sYpERdAAAAAJ&hl=nl&oi=ao" target="_blank" rel="noopener noreferrer">
+                    Scholar
+                </a>
+            </div>
+
+            <p> </p>
+
+            <!-- Row 4 (single button, since total count is odd) -->
+            <div class="button-container">
+                <a class="contact-button" href="https://www.researchgate.net/profile/Lj-Groot" target="_blank" rel="noopener noreferrer">
+                    ResearchGate
+                </a>
+            </div>
+        </div>
     </div>
 
-    <p> </p>
-
-    <!-- Row 2 -->
-    <div class="button-container">
-        <a class="contact-button" href="https://orcid.org/0000-0002-8711-6086" target="_blank" rel="noopener noreferrer">
-            ORCID
-        </a>
-        <a class="contact-button" href="https://osf.io/zwbha/" target="_blank" rel="noopener noreferrer">
-            OSF
-        </a>
-    </div>
-
-    <p> </p>
-
-    <!-- Row 3 -->
-    <div class="button-container">
-        <a class="contact-button" href="https://www.uva.nl/en/profile/g/r/l.j.groot/l.j.groot.html" target="_blank" rel="noopener noreferrer">
-            UvA
-        </a>
-        <a class="contact-button" href="https://scholar.google.com/citations?user=sYpERdAAAAAJ&hl=nl&oi=ao" target="_blank" rel="noopener noreferrer">
-            Scholar
-        </a>
-    </div>
-
-    <p> </p>
-
-    <!-- Row 4 (single button, since total count is odd) -->
-    <div class="button-container">
-        <a class="contact-button" href="https://www.researchgate.net/profile/Lj-Groot" target="_blank" rel="noopener noreferrer">
-            ResearchGate
-        </a>
-    </div>
-</div>
-    </div>
-
- <footer class="footer">
+    <footer class="footer">
         <p>
             &copy; <span id="current-year"></span> L.J. Groot |
             <a href="https://ljgroot.github.io/" style="color: #6a11cb;">
@@ -88,9 +94,23 @@
         </p>
     </footer>
 
-<script>
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
-    
+    <script>
+      // Toggle the mobile menu (same pattern as other pages)
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('site-nav');
+
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      // Set current year in footer
+      const yearSpan = document.getElementById('current-year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    </script>
 </body>
 </html>
