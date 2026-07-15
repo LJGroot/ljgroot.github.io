@@ -105,6 +105,7 @@ nav a.active {
     color: #2575fc;
 }
 
+/* Menu button (hidden on desktop) */
 .nav-toggle {
     display: none;
     background-color: #2575fc;
@@ -117,6 +118,7 @@ nav a.active {
     cursor: pointer;
 }
 
+/* Mobile: hide nav by default, show when toggled */
 @media (max-width: 600px) {
     .nav-toggle {
         display: block;       /* show button on small screens */
@@ -180,7 +182,7 @@ header {
     text-align: center;
 }
 
-/* If you want landing page-specific portrait styling: */
+/* Landing page-specific portrait styling override */
 .portrait-img {
     border-radius: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -221,7 +223,7 @@ header {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/*Publications*/
+/* Publications */
 .publication-year {
     font-size: 1.5rem;
     font-weight: 600;
@@ -266,6 +268,7 @@ header {
     font-size: 1.1rem;
 }
 
+/* Contact page button layout */
 .button-container {
     display: flex;
     justify-content: center;
@@ -297,7 +300,6 @@ header {
 }
 
 /* Grid Containers */
-/* NEW: Remove horizontal margins so 100% width doesn't overflow */
 .column-4 {
     float: left;
     width: 100%;
@@ -323,7 +325,7 @@ header {
 }
 
 /* ============================= */
-/* NEW: Responsive layout tweaks */
+/* Responsive layout tweaks */
 /* ============================= */
 
 /* Slightly adjust typography on medium screens */
@@ -393,14 +395,8 @@ header {
 }
 
 /* Very small screens (phones) */
+/* CHANGED: removed full-width nav buttons to keep nav compact */
 @media (max-width: 480px) {
-    /* Make nav links full-width so they’re easy to tap */
-    nav a {
-        flex: 1 1 100%;
-        text-align: center;
-    }
-
-    /* Allow images to be fully responsive */
     .portrait-img,
     .other-img {
         max-width: 100%;
