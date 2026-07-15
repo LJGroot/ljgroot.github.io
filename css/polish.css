@@ -1,0 +1,177 @@
+/* polish.css
+ * Visual refinements that sit on top of your existing CSS.
+ * No structural/layout changes; only look & feel improvements.
+ */
+
+/* ============================= */
+/* 1. Design tokens / base colors */
+/* ============================= */
+
+:root {
+    --color-bg: #f5f5f7;
+    --color-bg-card: #ffffff;
+    --color-text: #333333;
+    --color-muted: #666666;
+    --color-primary: #2575fc;
+    --color-secondary: #6a11cb;
+    --border-soft: #e5e7eb;
+    --radius-card: 12px;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Global text polish */
+body {
+    line-height: 1.7;
+    color: var(--color-text);
+    background: var(--color-bg); /* replaces the strong gradient with a calmer background */
+}
+
+/* ============================= */
+/* 2. Typography & readable width */
+/* ============================= */
+
+/* Make main text blocks easier to read */
+.container,
+.about-me,
+.publication,
+.publication-year {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Basic paragraph spacing */
+p {
+    margin: 0 0 1rem;
+}
+
+/* Headings: consistent spacing & hierarchy */
+.page-title {
+    letter-spacing: 0.02em;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-header {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+}
+
+/* Subtle text color for secondary text blocks */
+.footer {
+    color: var(--color-muted);
+}
+
+/* ============================= */
+/* 3. Card / container unification */
+/* ============================= */
+
+/* Base card style for various white boxes */
+.div-1,
+.div-nav,
+.div-4,
+.contact-link,
+.column-4 {
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+}
+
+/* Light, consistent borders on white cards */
+.div-nav,
+.div-4,
+.contact-link {
+    border: 1px solid var(--border-soft);
+}
+
+/* Keep .div-1 special with a refined gradient */
+.div-1 {
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
+    color: #ffffff;
+}
+
+/* ============================= */
+/* 4. Image framing polish        */
+/* ============================= */
+
+.portrait-img,
+.other-img {
+    border-radius: 1rem;
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    margin: 1.5rem;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Optional: slightly more space between image and text on larger screens */
+@media (min-width: 769px) {
+    .portrait-img,
+    .other-img {
+        margin: 1.5rem 0 1.5rem 1.5rem;
+    }
+}
+
+/* ============================= */
+/* 5. Links, buttons, interactions */
+/* ============================= */
+
+/* Smooth transitions for interactive elements */
+nav a,
+.contact-link,
+.contact-button {
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease;
+}
+
+/* Nav: subtle underline on hover for clarity */
+nav a:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+/* Active nav: slightly bolder + underline */
+nav a.active {
+    font-weight: 600;
+    border-bottom: 2px solid currentColor;
+}
+
+/* Contact cards: softer hover effect */
+.contact-link:hover {
+    background-color: #f9fafb;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons: focus-visible for accessibility */
+.contact-button:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+}
+
+/* ============================= */
+/* 6. Spacing refinements         */
+/* ============================= */
+
+/* Ensure main content has comfortable spacing below the header */
+.container {
+    margin-top: 2.5rem;
+}
+
+/* Publications: breathing room between year and entries */
+.publication-year {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.publication {
+    margin-bottom: 1.25rem;
+}
+
+/* Column sections: more consistent vertical rhythm */
+.column-4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
