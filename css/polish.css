@@ -23,7 +23,7 @@
 body {
     line-height: 1.7;
     color: var(--color-text);
-    background: var(--color-bg); /* replaces the strong gradient with a calmer background */
+    /*background: var(--color-bg); /* replaces the strong gradient with a calmer background */
 }
 
 /* ============================= */
