@@ -166,7 +166,16 @@ button.secondary {
   margin-bottom: 18px;
 }
 
-.chart-card { min-height: 330px; }
+.chart-card {
+  position: relative;
+  height: 360px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chart-card canvas {
+  max-height: 290px !important;
+}
 
 .filters {
   display: flex;
