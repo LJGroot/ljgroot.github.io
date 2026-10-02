@@ -133,6 +133,7 @@ async function loadSends() {
           <td>${escapeHtml(send.route || "—")}</td>
           <td>${send.grade}</td>
           <td>${send.ascent_type}</td>
+          <td>${escapeHtml(send.style || "—")}</td>
           <td>${sendScore(send).toFixed(0)}</td>
           <td>
             <span class="badge ${isValid(send) ? "valid" : "expired"}">
