@@ -1,67 +1,104 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Climbing progression | Lennert J. Groot</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Lennert J. Groot</title>
+
+    <!-- Viewport for responsive behavior -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/jpg" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/polish.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- (Optional but recommended) SEO / sharing tags you had earlier -->
+    <meta name="description" content="Personal and academic homepage of Lennert J. Groot. Research, CV, publications, and contact information.">
+    <meta name="author" content="Lennert J. Groot">
+    <link rel="canonical" href="https://ljgroot.github.io/">
+
+    <meta property="og:title" content="Lennert J. Groot">
+    <meta property="og:description" content="Personal and academic homepage of Lennert J. Groot. Research, CV, publications, and contact information.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ljgroot.github.io/">
 </head>
+
 <body>
-  <header>
-    <a class="site-name" href="https://ljgroot.github.io/">Lennert J. Groot</a>
-    <nav>
-      <a href="https://ljgroot.github.io/">Home</a>
-      <a href="https://ljgroot.github.io/about-me.html">About me</a>
-      <a href="https://ljgroot.github.io/my-research.html">My research</a>
-      <a href="https://ljgroot.github.io/publications.html">Publications</a>
-      <a href="https://ljgroot.github.io/contact.html">Contact</a>
-    </nav>
-  </header>
+    <div class="wrapper">
+        <header>
+            <h1 class="header-title">Lennert J. Groot</h1>
+        </header>
 
-  <main>
-    <section id="setup" class="notice hidden">
-      <strong>Setup needed.</strong>
-      Add your Supabase URL and publishable key in
-      <code>assets/config.js</code>, then deploy this folder.
-    </section>
+        <!-- Menu button for small screens -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+            Menu
+        </button>
 
-    <section id="auth" class="auth card hidden">
-      <h1>Climbing progression</h1>
-      <p>Sign in to view and update your private climbing log.</p>
+        <!-- IMPORTANT: id="site-nav" so CSS + JS can target it -->
+        <nav id="site-nav">
+            <a href="index.html" class="active">Home</a>
+            <a href="about-me.html">About Me</a>
+            <a href="my-research.html">My Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="contact.html">Contact</a>
+        </nav>
 
-      <form id="login-form">
-        <label>
-          Email
-          <input id="email" type="email" autocomplete="email" required>
-        </label>
-
-        <label>
-          Password
-          <input id="password" type="password" autocomplete="current-password" required>
-        </label>
-
-        <button type="submit">Sign in</button>
-        <p id="auth-message" role="status"></p>
-      </form>
-    </section>
-
-    <section id="app" class="hidden">
-      <div class="title-row">
-        <div>
-          <h1>Climbing progression</h1>
-          <p id="welcome"></p>
+        <div class="container">
+            <h2 class="section-header">Welcome to My Home Page</h2>
+            <p class="about-me">👋 Hi, I'm Lennert,</p>
+            <p class="about-me">
+                🎓 I'm a postdoc researcher at
+                <a href="https://ascor.uva.nl/" target="_blank" rel="noopener noreferrer" style="color: #6a11cb;">ASCOR</a>,
+                at the University of Amsterdam.
+            </p>
+            <p class="about-me">
+                👀 I'm interested in MASEM, Open Science, Data Donation, & Rock Climbing 🧗.
+            </p>
+            <p class="about-me">
+                🌱 I currently use R, Quarto, LaTeX, HTML/CSS, & Python, with varying levels of proficiency.
+                Click here to check out
+                <a href="https://github.com/LJGroot" target="_blank" rel="noopener noreferrer" style="color: #6a11cb;">
+                    my GitHub repositories</a>.
+            </p>
+            <p class="about-me">
+                📫 How to reach me: email me at l.j.groot[AT]uva[DOT]nl, lg90[AT]duck[DOT]com or
+                <a href="contact.html" style="color: #6a11cb;">find me online</a>.
+            </p>
         </div>
-        <button id="sign-out" class="secondary">Sign out</button>
-      </div>
+    </div>
 
-      <div class="kpis">
-        <article>
-          <span>Valid sends</span>
-          <strong id="valid-sends">–</strong>
-          <small>Sent in the last 180 days</small>
-        </article>
+    <footer class="footer">
+        <p>
+            &copy; <span id="current-year"></span> L.J. Groot |
+            <a href="https://ljgroot.github.io/" style="color: #6a11cb;">
+                ljgroot.github.io
+            </a>
+        </p>
+    </footer>
+
+    <script>
+      // Toggle the mobile menu
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('site-nav');
+
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      // Set current year in footer
+      const yearSpan = document.getElementById('current-year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    </script>
+</body>
+</html>        </article>
 
         <article>
           <span>Current level</span>
