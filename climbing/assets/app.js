@@ -11,6 +11,9 @@
     "7a+", "7b", "7b+", "7c", "7c+", "8a"
   ];
 
+  const TABLE_PAGE_SIZE = 25;
+let tablePage = 1;
+
   const baseScores = Object.fromEntries(
     grades.map((grade, index) => [grade, 600 + index * (100 / 6)])
   );
