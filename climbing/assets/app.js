@@ -257,7 +257,9 @@ charts.push(new Chart($("#progress-chart"), {
       }
     });
 
-    const pyramidGrades = [...grades].reverse();
+    const pyramidGrades = grades
+  .filter(grade => grades.indexOf(grade) >= grades.indexOf("7a"))
+  .reverse();
 
     charts.push(new Chart($("#pyramid-chart"), {
       type: "bar",
