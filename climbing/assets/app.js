@@ -19,6 +19,8 @@
   let sends = [];
   let charts = [];
 
+  const readOnly = window.CLIMBING_READ_ONLY === true;
+
   const sendScore = send =>
     baseScores[send.grade] + ({ RP: 0, FL: 10, OS: 15 }[send.ascent_type] || 0);
 
