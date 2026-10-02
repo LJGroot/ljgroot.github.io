@@ -301,3 +301,21 @@ footer {
 .pyramid-card {
   height: 460px;
 }
+
+/* table pagination */
+.table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.table-pagination button {
+  min-width: 96px;
+}
+
+.table-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
