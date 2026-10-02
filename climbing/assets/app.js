@@ -87,6 +87,10 @@ async function loadSends() {
 
     const hardest = topTen[0];
 
+    const hardSendCount = sends.filter(send =>
+    grades.indexOf(send.grade) >= grades.indexOf("7a")
+    ).length;
+    
     const goalCount = sends.filter(send =>
       send.sent_on.startsWith("2026") &&
       grades.indexOf(send.grade) >= grades.indexOf("7a")
@@ -100,6 +104,7 @@ async function loadSends() {
     $("#hardest-detail").textContent = hardest
       ? `${hardest.route || "Unnamed route"} · ${hardest.gym_crag}`
       : "";
+    $("#hard-send-count").textContent = hardSendCount;
     $("#goal-progress").textContent = `${goalCount} / 16`;
 
     renderTable();
