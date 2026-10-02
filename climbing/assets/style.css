@@ -282,3 +282,17 @@ footer {
     flex-wrap: wrap;
   }
 }
+
+/* Public dashboard: hide all data-management controls. */
+.read-only #new-send,
+.read-only .file-button,
+.read-only .edit,
+.read-only #send-dialog {
+  display: none !important;
+}
+
+/* Hide the empty Edit column in the public send table. */
+.read-only .table-wrap th:last-child,
+.read-only .table-wrap td:last-child {
+  display: none;
+}
