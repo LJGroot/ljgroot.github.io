@@ -263,85 +263,119 @@ charts.push(new Chart($("#progress-chart"), {
   }
 }));
 
-    const ascentTypes = ["RP", "FL", "OS"];
+    const ascentTypes = [
+  {
+    key: "RP",
+    label: "RP",
+    color: "#0d6b64"
+  },
+  {
+    key: "FL",
+    label: "FL",
+    color: "#8dbdb3"
+  },
+  {
+    key: "OS",
+    label: "OS",
+    color: "#e8b766"
+  }
+];
 
-    const pyramidCounts = Object.fromEntries(
-      grades.map(grade => [
-        grade,
-        Object.fromEntries(ascentTypes.map(type => [type, 0]))
+const ropeStyles = [
+  {
+    key: "LD",
+    label: "Lead (LD)"
+  },
+  {
+    key: "TR",
+    label: "Top rope (TR)"
+  }
+];
+
+const pyramidCounts = Object.fromEntries(
+  grades.map(grade => [
+    grade,
+    Object.fromEntries(
+      ascentTypes.map(ascentType => [
+        ascentType.key,
+        { LD: 0, TR: 0 }
       ])
-    );
+    )
+  ])
+);
 
-    sends.forEach(send => {
-      if (
-        pyramidCounts[send.grade] &&
-        ascentTypes.includes(send.ascent_type)
-      ) {
-        pyramidCounts[send.grade][send.ascent_type]++;
-      }
-    });
+sends.forEach(send => {
+  const style = send.style || "TR";
 
-    const pyramidGrades = grades
+  if (
+    pyramidCounts[send.grade] &&
+    pyramidCounts[send.grade][send.ascent_type] &&
+    pyramidCounts[send.grade][send.ascent_type][style] !== undefined
+  ) {
+    pyramidCounts[send.grade][send.ascent_type][style]++;
+  }
+});
+
+const pyramidGrades = grades
   .filter(grade => grades.indexOf(grade) >= grades.indexOf("7a"))
   .reverse();
 
-    charts.push(new Chart($("#pyramid-chart"), {
-      type: "bar",
-      data: {
-        labels: pyramidGrades,
-        datasets: [
-          {
-            label: "RP",
-            data: pyramidGrades.map(grade => pyramidCounts[grade].RP),
-            backgroundColor: "#0d6b64"
-          },
-          {
-            label: "FL",
-            data: pyramidGrades.map(grade => pyramidCounts[grade].FL),
-            backgroundColor: "#8dbdb3"
-          },
-          {
-            label: "OS",
-            data: pyramidGrades.map(grade => pyramidCounts[grade].OS),
-            backgroundColor: "#e8b766"
-          }
-        ]
-      },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            stacked: true,
-            beginAtZero: true,
-            ticks: {
-              precision: 0
-            },
-            title: {
-              display: true,
-              text: "Number of sends"
-            }
-          },
-          y: {
-            stacked: true,
-            title: {
-              display: true,
-              text: "Grade"
-            }
-          }
+const pyramidDatasets = ascentTypes.flatMap(ascentType =>
+  ropeStyles.map(ropeStyle => ({
+    label: `${ascentType.label} · ${ropeStyle.label}`,
+    data: pyramidGrades.map(
+      grade => pyramidCounts[grade][ascentType.key][ropeStyle.key]
+    ),
+    backgroundColor: ropeStyle.key === "TR"
+      ? stripedPattern(ascentType.color)
+      : ascentType.color,
+    borderColor: ascentType.color,
+    borderWidth: 1
+  }))
+);
+
+charts.push(new Chart($("#pyramid-chart"), {
+  type: "bar",
+  data: {
+    labels: pyramidGrades,
+    datasets: pyramidDatasets
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        stacked: true,
+        beginAtZero: true,
+        ticks: {
+          precision: 0
         },
-        plugins: {
-          legend: {
-            position: "top"
-          },
-          tooltip: {
-            mode: "index",
-            intersect: false
-          }
+        title: {
+          display: true,
+          text: "Number of sends"
+        }
+      },
+      y: {
+        stacked: true,
+        title: {
+          display: true,
+          text: "Grade"
         }
       }
-    }));
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: "top"
+      },
+      tooltip: {
+        mode: "index",
+        intersect: false
+      }
+    }
+  }
+}));
 
     const styles = [
   {
