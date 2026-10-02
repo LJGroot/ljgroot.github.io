@@ -138,46 +138,71 @@ async function loadSends() {
   }
 
   function renderTable() {
-    const query = $("#search").value.toLowerCase();
-    const type = $("#type-filter").value;
+  const query = $("#search").value.toLowerCase();
+  const type = $("#type-filter").value;
 
-    const shown = [...sends]
-      .filter(send => !type || send.ascent_type === type)
-      .filter(send =>
-        [send.gym_crag, send.route, send.grade]
-          .join(" ")
-          .toLowerCase()
-          .includes(query)
-      )
-      .sort((a, b) => b.sent_on.localeCompare(a.sent_on));
+  const shown = [...sends]
+    .filter(send => !type || send.ascent_type === type)
+    .filter(send =>
+      [send.gym_crag, send.route, send.grade]
+        .join(" ")
+        .toLowerCase()
+        .includes(query)
+    )
+    .sort((a, b) => b.sent_on.localeCompare(a.sent_on));
 
-    $("#send-rows").innerHTML = shown.length
-      ? shown.map(send => `
-        <tr>
-          <td>${formatDate(send.sent_on)}</td>
-          <td>${escapeHtml(send.gym_crag)}</td>
-          <td>${escapeHtml(send.route || "—")}</td>
-          <td>${send.grade}</td>
-          <td>${send.ascent_type}</td>
-          <td>${escapeHtml(send.style || "—")}</td>
-          <td>${sendScore(send).toFixed(0)}</td>
-          <td>
-            <span class="badge ${isValid(send) ? "valid" : "expired"}">
-              ${isValid(send) ? "Yes" : "No"}
-            </span>
-          </td>
-          <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
-        </tr>
-      `).join("")
-      : `<tr><td colspan="9">No sends match the filters.</td></tr>`;
+  const totalPages = Math.max(
+    1,
+    Math.ceil(shown.length / TABLE_PAGE_SIZE)
+  );
 
-    document.querySelectorAll(".edit").forEach(button => {
-      button.onclick = () => {
-        const send = sends.find(item => String(item.id) === button.dataset.id);
-        openDialog(send);
-      };
-    });
-  }
+  tablePage = Math.min(tablePage, totalPages);
+
+  const startIndex = (tablePage - 1) * TABLE_PAGE_SIZE;
+  const paginatedSends = shown.slice(
+    startIndex,
+    startIndex + TABLE_PAGE_SIZE
+  );
+
+  const pagination = $("#table-pagination");
+  const previousButton = $("#table-prev");
+  const nextButton = $("#table-next");
+  const pageStatus = $("#table-page-status");
+
+  pagination.hidden = shown.length <= TABLE_PAGE_SIZE;
+
+  previousButton.disabled = tablePage === 1;
+  nextButton.disabled = tablePage === totalPages;
+
+  pageStatus.textContent = `Page ${tablePage} of ${totalPages}`;
+
+  $("#send-rows").innerHTML = shown.length
+    ? paginatedSends.map(send => `
+      <tr>
+        <td>${formatDate(send.sent_on)}</td>
+        <td>${escapeHtml(send.gym_crag)}</td>
+        <td>${escapeHtml(send.route || "—")}</td>
+        <td>${send.grade}</td>
+        <td>${send.ascent_type}</td>
+        <td>${escapeHtml(send.style || "—")}</td>
+        <td>${sendScore(send).toFixed(0)}</td>
+        <td>
+          <span class="badge ${isValid(send) ? "valid" : "expired"}">
+            ${isValid(send) ? "Yes" : "No"}
+          </span>
+        </td>
+        <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
+      </tr>
+    `).join("")
+    : `<tr><td colspan="9">No sends match the filters.</td></tr>`;
+
+  document.querySelectorAll(".edit").forEach(button => {
+    button.onclick = () => {
+      const send = sends.find(item => String(item.id) === button.dataset.id);
+      openDialog(send);
+    };
+  });
+}
 
   function renderCharts(validSends) {
     charts.forEach(chart => chart.destroy());
@@ -588,9 +613,29 @@ if (readOnly) {
 
 $("#close-dialog").onclick = () => $("#send-dialog").close();
 $("#cancel-dialog").onclick = () => $("#send-dialog").close();
-$("#search").oninput = renderTable;
-$("#type-filter").onchange = renderTable;
+    
+$("#search").addEventListener("input", () => {
+  tablePage = 1;
+  renderTable();
+});
 
+$("#type-filter").addEventListener("change", () => {
+  tablePage = 1;
+  renderTable();
+});
+
+$("#table-prev").addEventListener("click", () => {
+  if (tablePage > 1) {
+    tablePage--;
+    renderTable();
+  }
+});
+
+$("#table-next").addEventListener("click", () => {
+  tablePage++;
+  renderTable();
+});
+    
     $("#send-form").onsubmit = async event => {
       event.preventDefault();
 
@@ -617,6 +662,18 @@ $("#type-filter").onchange = renderTable;
       await loadSends();
     };
   }
+
+  $("#table-prev").addEventListener("click", () => {
+  if (tablePage > 1) {
+    tablePage--;
+    renderTable();
+  }
+});
+
+$("#table-next").addEventListener("click", () => {
+  tablePage++;
+  renderTable();
+});
 
   initialise();
 })();
