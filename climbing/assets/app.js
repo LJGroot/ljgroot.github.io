@@ -147,30 +147,88 @@
     charts.forEach(chart => chart.destroy());
     charts = [];
 
-    const chronological = [...sends].sort((a, b) =>
-      a.sent_on.localeCompare(b.sent_on)
+const chronological = [...sends].sort((a, b) =>
+  a.sent_on.localeCompare(b.sent_on)
+);
+
+/*
+  For every date with a logged send:
+  1. Look back 180 days from that date.
+  2. Keep ascents that were valid on that date.
+  3. Select the ten highest scores.
+  4. Calculate their mean score.
+
+  This produces a historical version of the workbook's
+  "average top 10 valid ascents" level.
+*/
+const progressDates = [...new Set(
+  chronological.map(send => send.sent_on)
+)];
+
+const progressLevels = progressDates.map(referenceDate => {
+  const reference = new Date(referenceDate + "T00:00:00");
+
+  const validAtThatTime = chronological.filter(send => {
+    const sendDate = new Date(send.sent_on + "T00:00:00");
+    const daysDifference = Math.floor(
+      (reference - sendDate) / 86400000
     );
 
-    charts.push(new Chart($("#progress-chart"), {
-      type: "line",
-      data: {
-        labels: chronological.map(send => formatDate(send.sent_on)),
-        datasets: [{
-          label: "Send score",
-          data: chronological.map(sendScore),
-          borderColor: "#0d6b64",
-          backgroundColor: "#0d6b6420",
-          tension: 0.25,
-          pointRadius: 4,
-          fill: true
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: { y: { suggestedMin: 590 } }
+    return daysDifference >= 0 && daysDifference <= 180;
+  });
+
+  const topTenAtThatTime = validAtThatTime
+    .sort((a, b) => sendScore(b) - sendScore(a))
+    .slice(0, 10);
+
+  if (!topTenAtThatTime.length) {
+    return null;
+  }
+
+  return topTenAtThatTime.reduce(
+    (total, send) => total + sendScore(send),
+    0
+  ) / topTenAtThatTime.length;
+});
+
+charts.push(new Chart($("#progress-chart"), {
+  type: "line",
+  data: {
+    labels: progressDates.map(formatDate),
+    datasets: [{
+      label: "Average top 10 valid sends",
+      data: progressLevels,
+      borderColor: "#0d6b64",
+      backgroundColor: "#0d6b6420",
+      tension: 0.25,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        suggestedMin: 590,
+        ticks: {
+          callback: value => nearestGrade(value)
+        }
       }
-    }));
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: context => {
+            const score = context.raw;
+            return `Average top 10: ${nearestGrade(score)} (${score.toFixed(1)})`;
+          }
+        }
+      }
+    }
+  }
+}));
 
     const counts = Object.fromEntries(grades.map(grade => [grade, 0]));
     validSends.forEach(send => counts[send.grade]++);
