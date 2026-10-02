@@ -1,0 +1,275 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: #1d2730;
+  background: #f6f7f5;
+  font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+  padding: 18px max(24px, calc((100vw - 1120px) / 2));
+  background: #fff;
+  border-bottom: 1px solid #dce1dc;
+}
+
+.site-name {
+  color: #172b3a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  color: #42515b;
+  font-size: .95rem;
+  text-decoration: none;
+}
+
+nav a:hover { color: #0d6b64; }
+
+main {
+  max-width: 1120px;
+  margin: 42px auto;
+  padding: 0 24px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+p { color: #52616a; }
+
+.hidden { display: none !important; }
+
+.card,
+.notice {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #dce1dc;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px #1426160b;
+}
+
+.notice {
+  margin-bottom: 24px;
+  background: #fff9e8;
+  border-color: #efd18c;
+}
+
+.auth {
+  max-width: 430px;
+  margin: 70px auto;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0;
+  color: #33414a;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  font: inherit;
+  background: #fff;
+  border: 1px solid #b9c3c5;
+  border-radius: 6px;
+}
+
+button,
+.file-button {
+  display: inline-block;
+  padding: 10px 15px;
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  background: #0d6b64;
+  border: 0;
+  border-radius: 6px;
+}
+
+button:hover,
+.file-button:hover { background: #09544f; }
+
+button.secondary {
+  color: #24323a;
+  background: #e7ece9;
+}
+
+.file-button input { display: none; }
+
+.title-row,
+.section-heading,
+.dialog-head,
+.dialog-actions,
+.button-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-row { justify-content: flex-end; }
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.kpis article {
+  padding: 18px;
+  color: #fff;
+  background: #174d49;
+  border-radius: 10px;
+}
+
+.kpis span,
+.kpis small {
+  display: block;
+  color: #d7e9e5;
+}
+
+.kpis strong {
+  display: block;
+  margin: 6px 0;
+  font-size: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.chart-card { min-height: 330px; }
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.filters input { max-width: 400px; }
+.filters select { width: 180px; }
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid #e2e6e3;
+}
+
+th {
+  color: #5d696d;
+  font-size: .82rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+td button {
+  padding: 6px 9px;
+  font-size: .85rem;
+}
+
+.badge {
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.valid { color: #087a50; }
+.expired { color: #9c542f; }
+
+.import-help {
+  margin-top: 0;
+  font-size: .88rem;
+}
+
+dialog {
+  width: min(500px, calc(100% - 30px));
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 16px 50px #0004;
+}
+
+dialog::backdrop { background: #10211b88; }
+
+dialog form { padding: 24px; }
+
+.icon {
+  padding: 1px 8px;
+  color: #41505a;
+  font-size: 1.7rem;
+  background: transparent;
+}
+
+.dialog-actions {
+  justify-content: flex-end;
+  margin-top: 22px;
+}
+
+footer {
+  padding: 18px;
+  color: #647078;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .kpis,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title-row {
+    align-items: flex-start;
+  }
+
+  .filters {
+    display: grid;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+    max-width: none;
+  }
+
+  .button-row,
+  .section-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
