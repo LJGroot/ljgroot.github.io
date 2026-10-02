@@ -100,7 +100,7 @@ async function loadSends() {
     $("#hardest-detail").textContent = hardest
       ? `${hardest.route || "Unnamed route"} · ${hardest.gym_crag}`
       : "";
-    $("#goal-progress").textContent = `${goalCount} / 65`;
+    $("#goal-progress").textContent = `${goalCount} / 16`;
 
     renderTable();
     renderCharts(validSends);
