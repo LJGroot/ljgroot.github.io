@@ -143,7 +143,7 @@ async function loadSends() {
           <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
         </tr>
       `).join("")
-      : `<tr><td colspan="8">No sends match the filters.</td></tr>`;
+      : `<tr><td colspan="9">No sends match the filters.</td></tr>`;
 
     document.querySelectorAll(".edit").forEach(button => {
       button.onclick = () => {
