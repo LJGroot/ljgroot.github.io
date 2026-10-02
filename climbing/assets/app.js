@@ -284,11 +284,11 @@ charts.push(new Chart($("#progress-chart"), {
 const ropeStyles = [
   {
     key: "LD",
-    label: "Lead (LD)"
+    label: "LD"
   },
   {
     key: "TR",
-    label: "Top rope (TR)"
+    label: "TR"
   }
 ];
 
@@ -380,13 +380,13 @@ charts.push(new Chart($("#pyramid-chart"), {
     const styles = [
   {
     key: "LD",
-    label: "Lead (LD)",
+    label: "LD",
     backgroundColor: stripedPattern("#8dbdb3"),
     borderColor: "#5f9f94"
   },
   {
     key: "TR",
-    label: "Top rope (TR)",
+    label: "TR",
     backgroundColor: "#8dbdb3",
     borderColor: "#5f9f94"
   }
