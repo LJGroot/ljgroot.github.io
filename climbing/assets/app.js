@@ -491,13 +491,13 @@ $("#type-filter").onchange = renderTable;
       const id = $("#send-id").value;
 
       const item = {
-        sent_on: $("#sent-on").value,
-        gym_crag: $("#gym-crag").value.trim(),
-        route: $("#route").value.trim(),
-        grade: $("#grade").value,
-        ascent_type: $("#ascent-type").value
-      };
-
+  sent_on: $("#sent-on").value,
+  gym_crag: $("#gym-crag").value.trim(),
+  route: $("#route").value.trim(),
+  grade: $("#grade").value,
+  ascent_type: $("#ascent-type").value,
+  style: $("#style").value
+};
       const result = id
         ? await supabase.from("sends").update(item).eq("id", id)
         : await supabase.from("sends").insert(item);
