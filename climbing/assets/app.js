@@ -58,6 +58,29 @@
     return div.innerHTML;
   }
 
+  function stripedPattern(baseColor) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  canvas.width = 10;
+  canvas.height = 10;
+
+  context.fillStyle = baseColor;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.strokeStyle = "rgba(255, 255, 255, 0.75)";
+  context.lineWidth = 2;
+
+  context.beginPath();
+  context.moveTo(-2, 10);
+  context.lineTo(10, -2);
+  context.moveTo(2, 12);
+  context.lineTo(12, 2);
+  context.stroke();
+
+  return context.createPattern(canvas, "repeat");
+}
+
 async function loadSends() {
   const tableName = readOnly ? "public_sends" : "sends";
 
@@ -320,25 +343,71 @@ charts.push(new Chart($("#progress-chart"), {
       }
     }));
 
-    const counts = Object.fromEntries(grades.map(grade => [grade, 0]));
-    validSends.forEach(send => counts[send.grade]++);
+    const styles = [
+  {
+    key: "LD",
+    label: "Lead (LD)",
+    backgroundColor: "#8dbdb3",
+    borderColor: "#5f9f94"
+  },
+  {
+    key: "TR",
+    label: "Top rope (TR)",
+    backgroundColor: stripedPattern("#8dbdb3"),
+    borderColor: "#5f9f94"
+  }
+];
 
-    charts.push(new Chart($("#grade-chart"), {
-      type: "bar",
-      data: {
-        labels: grades,
-        datasets: [{
-          label: "Valid sends",
-          data: grades.map(grade => counts[grade]),
-          backgroundColor: "#8dbdb3"
-        }]
+const gradeStyleCounts = Object.fromEntries(
+  grades.map(grade => [
+    grade,
+    { LD: 0, TR: 0 }
+  ])
+);
+
+validSends.forEach(send => {
+  const style = send.style || "TR";
+
+  if (gradeStyleCounts[send.grade] && gradeStyleCounts[send.grade][style] !== undefined) {
+    gradeStyleCounts[send.grade][style]++;
+  }
+});
+
+charts.push(new Chart($("#grade-chart"), {
+  type: "bar",
+  data: {
+    labels: grades,
+    datasets: styles.map(style => ({
+      label: style.label,
+      data: grades.map(grade => gradeStyleCounts[grade][style.key]),
+      backgroundColor: style.backgroundColor,
+      borderColor: style.borderColor,
+      borderWidth: 1
+    }))
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        stacked: true
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } }
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        ticks: {
+          precision: 0
+        }
       }
-    }));
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: "top"
+      }
+    }
+  }
+}));
   }
 
   function openDialog(send = null) {
