@@ -133,15 +133,16 @@ button.secondary {
 
 .button-row { justify-content: flex-end; }
 
+/* KPI tiles*/
 .kpis {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
   margin: 24px 0;
 }
 
 .kpis article {
-  padding: 18px;
+  padding: 14px;
   color: #fff;
   background: #174d49;
   border-radius: 10px;
