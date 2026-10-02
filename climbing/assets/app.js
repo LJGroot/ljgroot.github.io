@@ -58,20 +58,22 @@
     return div.innerHTML;
   }
 
-  async function loadSends() {
-    const { data, error } = await supabase
-      .from("sends")
-      .select("*")
-      .order("sent_on", { ascending: false });
+async function loadSends() {
+  const tableName = readOnly ? "public_sends" : "sends";
 
-    if (error) {
-      alert(error.message);
-      return;
-    }
+  const { data, error } = await supabase
+    .from(tableName)
+    .select("*")
+    .order("sent_on", { ascending: false });
 
-    sends = data || [];
-    render();
+  if (error) {
+    alert(error.message);
+    return;
   }
+
+  sends = data || [];
+  render();
+}
 
   function render() {
     const validSends = sends.filter(isValid);
@@ -311,12 +313,20 @@ charts.push(new Chart($("#progress-chart"), {
     await loadSends();
   }
 
-  async function showApp(session) {
-    $("#auth").classList.add("hidden");
-    $("#app").classList.remove("hidden");
+async function showApp(session = null) {
+  $("#auth").classList.add("hidden");
+  $("#app").classList.remove("hidden");
+
+  if (readOnly) {
+    $("#welcome").textContent = "Public read-only dashboard";
+    $("#sign-out").style.display = "none";
+  } else {
     $("#welcome").textContent = session.user.email;
-    await loadSends();
+    $("#sign-out").style.display = "";
   }
+
+  await loadSends();
+}
 
   async function initialise() {
     $("#grade").innerHTML = grades.map(grade =>
@@ -333,29 +343,37 @@ charts.push(new Chart($("#progress-chart"), {
       config.supabasePublishableKey
     );
 
-    const { data: { session } } = await supabase.auth.getSession();
+  if (readOnly) {
+  // Public dashboard: no login required.
+  await showApp();
+} else {
+  // Admin page: login remains required.
+  const { data: { session } } = await supabase.auth.getSession();
 
-    if (session) {
-      await showApp(session);
-    } else {
-      $("#auth").classList.remove("hidden");
+  if (session) {
+    await showApp(session);
+  } else {
+    $("#auth").classList.remove("hidden");
+  }
+
+  $("#login-form").onsubmit = async event => {
+    event.preventDefault();
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: $("#email").value,
+      password: $("#password").value
+    });
+
+    $("#auth-message").textContent = error ? error.message : "";
+
+    if (!error) {
+      const { data: { session: newSession } } =
+        await supabase.auth.getSession();
+
+      await showApp(newSession);
     }
-
-    $("#login-form").onsubmit = async event => {
-      event.preventDefault();
-
-      const { error } = await supabase.auth.signInWithPassword({
-        email: $("#email").value,
-        password: $("#password").value
-      });
-
-      $("#auth-message").textContent = error ? error.message : "";
-
-      if (!error) {
-        const { data: { session: newSession } } = await supabase.auth.getSession();
-        await showApp(newSession);
-      }
-    };
+  };
+}
 
     $("#sign-out").onclick = async () => {
       await supabase.auth.signOut();
