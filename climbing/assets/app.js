@@ -326,7 +326,7 @@ const pyramidDatasets = ascentTypes.flatMap(ascentType =>
     data: pyramidGrades.map(
       grade => pyramidCounts[grade][ascentType.key][ropeStyle.key]
     ),
-    backgroundColor: ropeStyle.key === "TR"
+    backgroundColor: ropeStyle.key === "LD"
       ? stripedPattern(ascentType.color)
       : ascentType.color,
     borderColor: ascentType.color,
@@ -381,17 +381,17 @@ charts.push(new Chart($("#pyramid-chart"), {
   {
     key: "LD",
     label: "Lead (LD)",
-    backgroundColor: "#8dbdb3",
+    backgroundColor: stripedPattern("#8dbdb3"),
     borderColor: "#5f9f94"
   },
   {
     key: "TR",
     label: "Top rope (TR)",
-    backgroundColor: stripedPattern("#8dbdb3"),
+    backgroundColor: "#8dbdb3",
     borderColor: "#5f9f94"
   }
 ];
-
+    
 const gradeStyleCounts = Object.fromEntries(
   grades.map(grade => [
     grade,
