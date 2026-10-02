@@ -134,24 +134,18 @@ async function loadSends() {
               ${isValid(send) ? "Yes" : "No"}
             </span>
           </td>
-          <td>
-  ${readOnly
-    ? ""
-    : `<button class="secondary edit" data-id="${send.id}">Edit</button>`
-  }
-</td>
+          <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
         </tr>
       `).join("")
       : `<tr><td colspan="8">No sends match the filters.</td></tr>`;
 
-    if (!readOnly) {
-  document.querySelectorAll(".edit").forEach(button => {
-    button.onclick = () => {
-      const send = sends.find(item => String(item.id) === button.dataset.id);
-      openDialog(send);
-    };
-  });
-}
+    document.querySelectorAll(".edit").forEach(button => {
+      button.onclick = () => {
+        const send = sends.find(item => String(item.id) === button.dataset.id);
+        openDialog(send);
+      };
+    });
+  }
 
   function renderCharts(validSends) {
     charts.forEach(chart => chart.destroy());
