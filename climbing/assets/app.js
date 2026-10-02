@@ -350,6 +350,7 @@ charts.push(new Chart($("#progress-chart"), {
     $("#route").value = send?.route || "";
     $("#grade").value = send?.grade || "6a";
     $("#ascent-type").value = send?.ascent_type || "RP";
+    $("#style").value = send?.style || "TR";
     $("#form-message").textContent = "";
     $("#send-dialog").showModal();
   }
