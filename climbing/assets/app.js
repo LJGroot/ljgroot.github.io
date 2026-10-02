@@ -215,7 +215,7 @@ charts.push(new Chart($("#progress-chart"), {
     maintainAspectRatio: false,
     scales: {
       y: {
-        suggestedMin: 590,
+        suggestedMin: 675,
         ticks: {
           callback: value => nearestGrade(value)
         }
