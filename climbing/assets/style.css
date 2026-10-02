@@ -297,3 +297,7 @@ footer {
 .read-only .table-wrap td:last-child {
   display: none;
 }
+
+.pyramid-card {
+  height: 460px;
+}
