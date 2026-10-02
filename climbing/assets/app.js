@@ -362,17 +362,23 @@ charts.push(new Chart($("#progress-chart"), {
       location.reload();
     };
 
-    $("#new-send").onclick = () => openDialog();
-    $("#close-dialog").onclick = () => $("#send-dialog").close();
-    $("#cancel-dialog").onclick = () => $("#send-dialog").close();
-    $("#search").oninput = renderTable;
-    $("#type-filter").onchange = renderTable;
+if (readOnly) {
+  $("#new-send").style.display = "none";
+  document.querySelector(".file-button").style.display = "none";
+} else {
+  $("#new-send").onclick = () => openDialog();
 
-    $("#csv-import").onchange = async event => {
-      const file = event.target.files[0];
-      if (file) await importCsv(file);
-      event.target.value = "";
-    };
+  $("#csv-import").onchange = async event => {
+    const file = event.target.files[0];
+    if (file) await importCsv(file);
+    event.target.value = "";
+  };
+}
+
+$("#close-dialog").onclick = () => $("#send-dialog").close();
+$("#cancel-dialog").onclick = () => $("#send-dialog").close();
+$("#search").oninput = renderTable;
+$("#type-filter").onchange = renderTable;
 
     $("#send-form").onsubmit = async event => {
       event.preventDefault();
