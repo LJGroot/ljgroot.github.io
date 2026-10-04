@@ -254,6 +254,7 @@ const progressLevels = progressDates.map(referenceDate => {
   (total, send) => total + sendScore(send),
   0
 ) / topTenAtThatTime.length;
+  });
 
 charts.push(new Chart($("#progress-chart"), {
   type: "line",
