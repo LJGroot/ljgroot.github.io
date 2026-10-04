@@ -663,17 +663,5 @@ $("#table-next").addEventListener("click", () => {
     };
   }
 
-  $("#table-prev").addEventListener("click", () => {
-  if (tablePage > 1) {
-    tablePage--;
-    renderTable();
-  }
-});
-
-$("#table-next").addEventListener("click", () => {
-  tablePage++;
-  renderTable();
-});
-
   initialise();
 })();
