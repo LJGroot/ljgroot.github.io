@@ -322,7 +322,7 @@
         maintainAspectRatio: false,
         scales: {
           y: {
-            suggestedMin: 683,
+            suggestedMin: 693,
             ticks: {
               callback: value => nearestGrade(value)
             }
