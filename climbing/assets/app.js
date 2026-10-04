@@ -33,6 +33,9 @@ let tablePage = 1;
     return daysOld <= 180;
   };
 
+  /* skip first few months in chart. Use date format YYYY-MM-DD */
+  const PROGRESS_START_DATE = "2023-10-01";
+  
   const formatDate = date =>
     new Intl.DateTimeFormat("en-GB", {
       day: "2-digit",
@@ -107,8 +110,12 @@ async function loadSends() {
       .sort((a, b) => sendScore(b) - sendScore(a))
       .slice(0, 10);
 
-    const currentLevel = topTen.length
-      ? nearestGrade(topTen.reduce((sum, send) => sum + sendScore(send), 0) / topTen.length)
+    const currentScore = topTen.length
+      ? topTen.reduce((sum, send) => sum + sendScore(send), 0) / 10
+      : null;
+
+const currentLevel = currentScore !== null
+      ? nearestGrade(currentScore)
       : "–";
 
     const hardest = topTen[0];
@@ -222,9 +229,10 @@ const chronological = [...sends].sort((a, b) =>
   This produces a historical version of the workbook's
   "average top 10 valid ascents" level.
 */
+    
 const progressDates = [...new Set(
   chronological.map(send => send.sent_on)
-)];
+)].filter(date => date >= PROGRESS_START_DATE);
 
 const progressLevels = progressDates.map(referenceDate => {
   const reference = new Date(referenceDate + "T00:00:00");
@@ -249,7 +257,7 @@ const progressLevels = progressDates.map(referenceDate => {
   return topTenAtThatTime.reduce(
   (total, send) => total + sendScore(send),
   0
-) / topTenAtThatTime.length;
+) / 10;
 });
 
 charts.push(new Chart($("#progress-chart"), {
