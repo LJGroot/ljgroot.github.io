@@ -107,12 +107,8 @@ async function loadSends() {
       .sort((a, b) => sendScore(b) - sendScore(a))
       .slice(0, 10);
 
-    const currentScore = topTen.length
-      ? topTen.reduce((sum, send) => sum + sendScore(send), 0) / 10
-      : null;
-
-    const currentLevel = currentScore !== null
-      ? nearestGrade(currentScore)
+    const currentLevel = topTen.length
+      ? nearestGrade(topTen.reduce((sum, send) => sum + sendScore(send), 0) / topTen.length)
       : "–";
 
     const hardest = topTen[0];
@@ -251,9 +247,9 @@ const progressLevels = progressDates.map(referenceDate => {
   }
 
   return topTenAtThatTime.reduce(
-    (total, send) => total + sendScore(send),
-    0
-  ) / 10;
+  (total, send) => total + sendScore(send),
+  0
+) / topTenAtThatTime.length;
 });
 
 charts.push(new Chart($("#progress-chart"), {
