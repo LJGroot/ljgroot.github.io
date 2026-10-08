@@ -121,9 +121,15 @@ In the repository that powers `[username].github.io`:
 2. Copy all files (`README.md`, `index.html`, `admin.html`, `supabase-schema.sql`) and `assets` folder (containing `app.js`, `config.js`, `styles.css`).
 3. Commit and push.
 
-The page will be available at:
+Make sure that the workflow Deploy to GitHub Pages is enabled (see Actions). 
+
+If the page was deployed in a `/climbing/` subfolder, the page will be available at:
     
     https://[username].github.io/climbing/
+
+If the page was deployed in the root folder, the page will be available at:
+
+    https://[username].github.io/
 
 ## Privacy
 
