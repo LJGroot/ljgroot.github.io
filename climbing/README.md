@@ -8,6 +8,12 @@ This folder is a climbing-progression dashboard that I host on my GitHub Pages. 
 - Private cloud database.
 - Add and edit sends.
 - CSV import.
+- Dashboard with
+  - highlight tiles:
+    - number of valid sends, current level, hardest send, yearly goal
+  - Progress chart
+  - Grade Pyramid
+  - Interactive table with logged sends
 - Score logic for sent routes:
   - French grading system
     - base number grade (1 - 9)
@@ -21,9 +27,9 @@ This folder is a climbing-progression dashboard that I host on my GitHub Pages. 
   - RP = base grade value
   - FL = base grade value plus 10
   - OS = base grade value plus 15
-- Valid sends are those from the previous 180 days.
-- Dashboard: valid sends, current level, hardest send, yearly goal, progression chart and grade chart.
-- Grade Pyramid
+  - Valid sends are those from the previous 180 days.
+  - Mean of top 10 valid sends is used to calculate current climbing level.
+
 
 ## Setup
 
@@ -116,7 +122,11 @@ In the repository that powers `[username].github.io`:
 The page will be available at:
     
     https://[username].github.io/climbing/
-    
+
 ## Privacy
 
 The website files themselves do not contain your climbing data. The data is stored in Supabase and protected by Row-Level Security, so only your signed-in account can add or update sends.
+
+## Note on filtering in dashboard tiles and grade pyramid
+
+Current app.js syntax uses as a definition for hard sends routes graded 7a or harder. This is used for several dashboard tiles and as a bottom value for the grade pyramid. This can be changed in the app.js script.
