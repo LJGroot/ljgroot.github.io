@@ -1,6 +1,6 @@
 # Climbing progression tracker
 
-This folder is a climbing-progression dashboard that I host on my GitHub Pages. There is a public read-only version available on the index page. Admin login allows for access to making additions and edits to the Supabase SQL data frame that is connected to the dashboard.
+This folder contains code for a progression dashboard for sport climbing that I host on my GitHub Pages. There is a public read-only version available on the index page. Admin login allows for access to making additions and edits to the Supabase SQL data frame that is connected to the dashboard.
 
 ## Features
 
