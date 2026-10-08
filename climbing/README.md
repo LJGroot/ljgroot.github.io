@@ -129,4 +129,4 @@ The website files themselves do not contain your climbing data. The data is stor
 
 ## Note on filtering in dashboard tiles and grade pyramid
 
-Current app.js syntax uses as a definition for hard sends routes graded 7a or harder. This is used for several dashboard tiles and as a bottom value for the grade pyramid. This can be changed in the app.js script.
+Current app.js syntax uses as a definition for hard sends routes graded 7a or harder. This is used for several dashboard tiles and as a bottom value for the grade pyramid. This can be changed in the app.js script. Remember to change text correspondingly in article elements in `index.html` and `admin.html` when doing so.
