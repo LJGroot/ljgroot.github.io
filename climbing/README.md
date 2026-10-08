@@ -93,7 +93,7 @@ Never use or publish the `service_role` key in this project.
 
 ### 6. Import historic sends
 
-Export the any archival sends in CSV format with exactly these column names:
+Export any archival sends in CSV format with exactly these column names:
     
     gym_crag,sent_on,route,grade,ascent_type,style
 
