@@ -423,6 +423,7 @@
           },
           y: {
             stacked: true,
+            max: "8a"
             title: { display: true, text: "Grade" }
           }
         },
@@ -505,7 +506,7 @@
     $("#sent-on").value = send?.sent_on || new Date().toISOString().slice(0, 10);
     $("#gym-crag").value = send?.gym_crag || "";
     $("#route").value = send?.route || "";
-    $("#grade").value = send?.grade || "6a";
+    $("#grade").value = send?.grade || "7a";
     $("#ascent-type").value = send?.ascent_type || "RP";
     $("#style").value = send?.style || "TR";
     $("#form-message").textContent = "";
@@ -532,7 +533,8 @@
         item.gym_crag &&
         item.sent_on &&
         item.grade &&
-        item.ascent_type
+        item.ascent_type &&
+        item.style
       )
       .map(item => ({
         gym_crag: item.gym_crag,
