@@ -107,10 +107,10 @@ After signing in, use the `Import CSV` button on the tracker page.
 
 ### 7. Publish with GitHub Pages
 
-In the repository that powers `ljgroot.github.io`:
+In the repository that powers `[username].github.io`:
 
-1. Create a folder named `climbing`.
-2. Copy all files (README.md, index.html, admin.html, supabase-schema.sql) and the assets folder (containing app.js, config.js, styles.css) into that.
+1. Use root folder or create a folder named `climbing`.
+2. Copy all files (`README.md`, `index.html`, `admin.html`, `supabase-schema.sql`) and `assets` folder (containing `app.js`, `config.js`, `styles.css`).
 3. Commit and push.
 
 The page will be available at:
