@@ -486,7 +486,10 @@
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          x: { stacked: true },
+          x: { stacked: true,
+               min: "6a",
+               max: "8a"
+             },
           y: {
             stacked: true,
             beginAtZero: true,
