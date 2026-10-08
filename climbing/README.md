@@ -90,12 +90,12 @@ Export the any archival sends in CSV format with exactly these column names:
     gym_crag,sent_on,route,grade,ascent_type,style
 
 Notes: 
-  gym_crag: character string
-  sent_on: date, use format YYYY-MM-DD
-  route: character string
-  grade: French grading style, lower than 6a not allowed in current app.js code
-  ascent_style: RP, FL, OS (redpoint, flash, on-sight)
-  style: TR, LD (toprope, lead)
+  - gym_crag: character string
+  - sent_on: date, use format YYYY-MM-DD
+  - route: character string
+  - grade: French grading style, lower than 6a not allowed in current app.js code
+  - ascent_style: RP, FL, OS (redpoint, flash, on-sight)
+  - style: TR, LD (toprope, lead)
    
 Example:
     
