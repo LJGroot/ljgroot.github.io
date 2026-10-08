@@ -421,9 +421,11 @@
             ticks: { precision: 0 },
             title: { display: true, text: "Number of sends" }
           },
+          /* Change y- axis bounds here */
           y: {
             stacked: true,
-            max: "8a",
+            min: "8a",
+            max: "7a",
             title: { display: true, text: "Grade" }
           }
         },
