@@ -52,3 +52,37 @@ on public.sends
 for delete
 to authenticated
 using ((select auth.uid()) = user_id);
+
+
+-- create duplicate public read only version
+create or replace view public.public_sends as
+select
+  id,
+  gym_crag,
+  sent_on,
+  route,
+  grade,
+  ascent_type
+from public.sends;
+
+grant select on public.public_sends to anon, authenticated;
+
+-- check policies
+select
+  schemaname,
+  tablename,
+  policyname,
+  roles,
+  cmd,
+  qual,
+  with_check
+from pg_policies
+where schemaname = 'public'
+  and tablename in ('sends', 'public_sends')
+order by tablename, cmd, policyname;
+
+select
+  relname as table_name,
+  relrowsecurity as rls_enabled
+from pg_class
+where relname = 'sends';
