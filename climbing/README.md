@@ -1,6 +1,6 @@
 # Climbing progression tracker
 
-This folder is a private climbing-progression page for GitHub Pages.
+This folder is a climbing-progression dashboard that I host on my GitHub Pages. There is a public read-only version available on the index page. Admin login allows for access to making additions and edits to the Supabase SQL data frame that is connected to the dashboard.
 
 ## Features
 
@@ -14,6 +14,7 @@ This folder is a private climbing-progression page for GitHub Pages.
   - OS = base grade value plus 15
 - Valid sends are those from the previous 180 days.
 - Dashboard: valid sends, current level, hardest send, yearly goal, progression chart and grade chart.
+- Grade Pyramid
 
 ## Setup
 
@@ -52,11 +53,11 @@ In Supabase, go to:
 Set:
     
     Site URL:
-    https://ljgroot.github.io/
+    https://[username].github.io/
     
 Add this Redirect URL:
     
-    https://ljgroot.github.io/climbing/
+    https://[username].github.io/climbing/
     
 ### 5. Add the project credentials
 
@@ -75,15 +76,23 @@ Never use or publish the `service_role` key in this project.
 
 ### 6. Import historic sends
 
-Export the relevant Excel send-log rows as a CSV with exactly these column names:
+Export the any archival sends in CSV format with exactly these column names:
     
-    gym_crag,sent_on,route,grade,ascent_type
-    
+    gym_crag,sent_on,route,grade,ascent_type,style
+
+Notes: 
+  gym_crag: character string
+  sent_on: date, use format YYYY-MM-DD
+  route: character string
+  grade: French grading style, lower than 6a not allowed in current app.js code
+  ascent_style: RP, FL, OS (redpoint, flash, on-sight)
+  style: TR, LD (toprope, lead)
+   
 Example:
     
-    gym_crag,sent_on,route,grade,ascent_type
-    HS,2026-10-01,Wit crimps,7a+,RP
-    Cuzoul plage,2026-08-07,Vibrosaure,7a+,RP
+    gym_crag,sent_on,route,grade,ascent_type,style
+    HS,2026-10-01,Wit crimps,7a+,RP,TR
+    Cuzoul plage,2026-08-07,Vibrosaure,7a+,RP,LD
     
 After signing in, use the `Import CSV` button on the tracker page.
 
@@ -92,13 +101,13 @@ After signing in, use the `Import CSV` button on the tracker page.
 In the repository that powers `ljgroot.github.io`:
 
 1. Create a folder named `climbing`.
-2. Copy all files created by the Python script into that folder.
+2. Copy all files (README.md, index.html, admin.html, supabase-schema.sql) and the assets folder (containing app.js, config.js, styles.css) into that.
 3. Commit and push.
 
 The page will be available at:
     
-    https://ljgroot.github.io/climbing/
+    https://[username].github.io/climbing/
     
 ## Privacy
 
-The website files themselves do not contain your climbing data. The data is stored in Supabase and protected by Row-Level Security, so only your signed-in account can read or update its sends.
+The website files themselves do not contain your climbing data. The data is stored in Supabase and protected by Row-Level Security, so only your signed-in account can add or update sends.
