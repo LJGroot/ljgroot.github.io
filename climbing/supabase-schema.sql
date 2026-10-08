@@ -62,7 +62,8 @@ select
   sent_on,
   route,
   grade,
-  ascent_type
+  ascent_type,
+  style
 from public.sends;
 
 grant select on public.public_sends to anon, authenticated;
