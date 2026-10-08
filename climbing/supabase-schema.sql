@@ -20,6 +20,9 @@ create table if not exists public.sends (
   ascent_type text not null check (
     ascent_type in ('RP', 'FL', 'OS')
   ),
+  style text not null check(
+    style in ('TR', 'LD')
+  ),
   created_at timestamptz not null default now()
 );
 
