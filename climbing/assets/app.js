@@ -170,7 +170,7 @@
       grades.indexOf(send.grade) >= grades.indexOf("7a")
     ).length;
 
-    /* Update text in the summary-card elements. */
+    /* Update text in the summary-card elements. Goal count is also set here*/
     $("#valid-sends").textContent = validSends.length;
     $("#current-level").textContent = currentLevel;
     $("#hardest-send").textContent = hardest
@@ -423,7 +423,7 @@
           },
           y: {
             stacked: true,
-            max: "8a"
+            max: "8a",
             title: { display: true, text: "Grade" }
           }
         },
