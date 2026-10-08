@@ -17,8 +17,11 @@
 
   /* Ordered grade scale used for score calculations, comparisons, forms, and charts. */
   const grades = [
-    "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a",
-    "7a+", "7b", "7b+", "7c", "7c+", "8a"
+    "5a", "5a+", "5b", "5b+", "5c", "5c+",
+    "6a", "6a+", "6b", "6b+", "6c", "6c+",
+    "7a", "7a+", "7b", "7b+", "7c", "7c+", 
+    "8a", "8a+", "8b", "8b+", "8c", "8c+", 
+    "9a", "9a+", "9b", "9b+", "9c", "9c+",
   ];
 
   /* Number of rows rendered on each table page. */
@@ -28,11 +31,11 @@
   let tablePage = 1;
 
   /*
-    Create an object such as { "6a": 600, "6a+": 616.666..., ... }.
+    Create an object such as { "5a": 500, "5a+": 516.666..., ... }.
     `map()` makes [key, value] pairs and `Object.fromEntries()` makes an object.
   */
   const baseScores = Object.fromEntries(
-    grades.map((grade, index) => [grade, 600 + index * (100 / 6)])
+    grades.map((grade, index) => [grade, 500 + index * (100 / 6)])
   );
 
   /* These values are filled or updated after the application starts. */
