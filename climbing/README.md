@@ -8,7 +8,16 @@ This folder is a climbing-progression dashboard that I host on my GitHub Pages. 
 - Private cloud database.
 - Add and edit sends.
 - CSV import.
-- Score logic based on the workbook:
+- Score logic for sent routes:
+  - French grading system
+    - base number grade (1 - 9)
+      - open ended scale but no routes graded higher than 9 currently exist.
+    - letter (a, b, c) and + symbol modifiers
+      - total of 3 * 2 = 6 increments per base grade
+  - 100 * (base grade number) plus 100 * (1/6) increments
+    - examples
+      - 6a+ -> 100 * 6 = 600 for base 6th grade (6a), with 600 plus (100 * (1/6)) = 616.67
+      - 7b  -> 100 * 7 = 700 for base 7th grade (7a), with 700 plus (100 * (2/6)) = 733.33
   - RP = base grade value
   - FL = base grade value plus 10
   - OS = base grade value plus 15
