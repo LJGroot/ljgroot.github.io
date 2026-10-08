@@ -533,8 +533,7 @@
         item.gym_crag &&
         item.sent_on &&
         item.grade &&
-        item.ascent_type &&
-        item.style
+        item.ascent_type
       )
       .map(item => ({
         gym_crag: item.gym_crag,
