@@ -190,6 +190,7 @@
   function renderTable() {
     const query = $("#search").value.toLowerCase();
     const type = $("#type-filter").value;
+    const style = $("#style-filter").value;
 
     /* Apply the optional type filter and text search, then sort newest first. */
     const shown = [...sends]
