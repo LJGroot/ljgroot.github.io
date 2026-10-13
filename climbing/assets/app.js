@@ -195,7 +195,7 @@
     /* Apply the optional type filter and text search, then sort newest first. */
     const shown = [...sends]
       .filter(send => !type || send.ascent_type === type)
-      .filter(send => !type || send. style === style)
+      .filter(send => !style || send. style === style)
       .filter(send =>
         [send.gym_crag, send.route, send.grade]
           .join(" ")
