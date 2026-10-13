@@ -195,6 +195,7 @@
     /* Apply the optional type filter and text search, then sort newest first. */
     const shown = [...sends]
       .filter(send => !type || send.ascent_type === type)
+      .filter(send => !type || send. style === style)
       .filter(send =>
         [send.gym_crag, send.route, send.grade]
           .join(" ")
@@ -660,15 +661,22 @@
     $("#close-dialog").onclick = () => $("#send-dialog").close();
     $("#cancel-dialog").onclick = () => $("#send-dialog").close();
 
-    /* Reset pagination whenever a filter changes, then redraw only the table. */
+    /* Reset pagination whenever a input in the search box, then redraw only the table. */
     $("#search").addEventListener("input", () => {
       tablePage = 1;
       renderTable();
     });
 
+    /* Return to the first table page whenever the type filter changes. */
     $("#type-filter").addEventListener("change", () => {
       tablePage = 1;
       renderTable();
+    });
+
+    /* Return to the first table page whenever the style filter changes. */
+    $("#style-filter").addEventListener("change", () => {
+    tablePage = 1;
+    renderTable();
     });
 
     /* Attach pagination listeners once during app initialisation. */
