@@ -186,82 +186,179 @@
     renderCharts(validSends);
   }
 
-  /* Filter, sort, paginate, and write the send-log rows to the document. */
-  function renderTable() {
-    const query = $("#search").value.toLowerCase();
-    const type = $("#type-filter").value;
-    const style = $("#style-filter").value;
+  /* Filter, search, sort, paginate, and write the send-log rows to the document. */
+function renderTable() {
+  const searchInput = $("#search");
+  const query = searchInput.value.trim();
+  const type = $("#type-filter").value;
+  const style = $("#style-filter").value;
 
-    /* Apply the optional type filter and text search, then sort newest first. */
-    const shown = [...sends]
-      .filter(send => !type || send.ascent_type === type)
-      .filter(send => !style || send. style === style)
-      .filter(send =>
-        [send.gym_crag, send.route, send.grade]
-          .join(" ")
-          .toLowerCase()
-          .includes(query)
-      )
-      .sort((a, b) => b.sent_on.localeCompare(a.sent_on));
-
-    /* Math.max ensures there is one logical page even if the search returns no sends. */
-    const totalPages = Math.max(
-      1,
-      Math.ceil(shown.length / TABLE_PAGE_SIZE)
-    );
-
-    /* If filtering reduced the number of pages, stay within the new final page. */
-    tablePage = Math.min(tablePage, totalPages);
-
-    /* slice() returns only the rows belonging to the selected page. */
-    const startIndex = (tablePage - 1) * TABLE_PAGE_SIZE;
-    const paginatedSends = shown.slice(
-      startIndex,
-      startIndex + TABLE_PAGE_SIZE
-    );
-
-    const pagination = $("#table-pagination");
-    const previousButton = $("#table-prev");
-    const nextButton = $("#table-next");
-    const pageStatus = $("#table-page-status");
-
-    pagination.hidden = shown.length <= TABLE_PAGE_SIZE;
-    previousButton.disabled = tablePage === 1;
-    nextButton.disabled = tablePage === totalPages;
-    pageStatus.textContent = `Page ${tablePage} of ${totalPages}`;
-
-    /*
-      The conditional operator chooses rendered rows when results exist;
-      otherwise it writes one table row containing the empty-state message.
-    */
-    $("#send-rows").innerHTML = shown.length
-      ? paginatedSends.map(send => `
-        <tr>
-          <td>${formatDate(send.sent_on)}</td>
-          <td>${escapeHtml(send.gym_crag)}</td>
-          <td>${escapeHtml(send.route || "—")}</td>
-          <td>${send.grade}</td>
-          <td>${send.ascent_type}</td>
-          <td>${escapeHtml(send.style || "—")}</td>
-          <td>${sendScore(send).toFixed(0)}</td>
-          <td>
-            <span class="badge ${isValid(send) ? "valid" : "expired"}">
-              ${isValid(send) ? "Yes" : "No"}
-            </span>
-          </td>
-          <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
-        </tr>
-      `).join("")
-      : `<tr><td colspan="9">No sends match the filters.</td></tr>`;
-
-    /* Reattach edit handlers because innerHTML replaced the old buttons. */
-    document.querySelectorAll(".edit").forEach(button => {
-      button.onclick = () => {
-        const send = sends.find(item => String(item.id) === button.dataset.id);
-        openDialog(send);
-      };
-    });
+  // Create a visible, accessible error message without editing the HTML.
+  let searchError = $("#search-error");
+  if (!searchError) {
+    searchError = document.createElement("p");
+    searchError.id = "search-error";
+    searchError.setAttribute("role", "status");
+    searchError.style.color = "#a12622";
+    searchError.style.margin = "0.5rem 0";
+    searchInput.closest(".filters").insertAdjacentElement("afterend", searchError);
   }
+
+  function compileSearch(text) {
+    if (!text) return () => true;
+
+    // Each OR group contains terms combined with AND.
+    const groups = [[]];
+    const tokenPattern = /(-?)(?:([a-z]+):)?(?:"([^"\r\n]+)"|([^\s"]+))/giy;
+    let position = 0;
+    let needsTerm = true;
+
+    while (position < text.length) {
+      if (/\s/.test(text[position])) {
+        position++;
+        continue;
+      }
+
+      tokenPattern.lastIndex = position;
+      const match = tokenPattern.exec(text);
+      if (!match) {
+        throw new Error('Invalid search. Check quotation marks and use spaces between terms.');
+      }
+
+      position = tokenPattern.lastIndex;
+      if (position < text.length && !/\s/.test(text[position])) {
+        throw new Error('Use a space between search terms.');
+      }
+
+      const excluded = match[1] === "-";
+      const field = (match[2] || "").toLowerCase();
+      const quoted = match[3] !== undefined;
+      const value = (quoted ? match[3] : match[4]).toLowerCase();
+      const operator = !field && !excluded && !quoted
+        ? value.toUpperCase()
+        : "";
+
+      if (operator === "AND" || operator === "OR") {
+        if (needsTerm) {
+          throw new Error('AND and OR must have a search term on both sides.');
+        }
+        if (operator === "OR") groups.push([]);
+        needsTerm = true;
+        continue;
+      }
+
+      if (operator === "NOT") {
+        throw new Error('Use -term to exclude a term, rather than NOT.');
+      }
+      if (!quoted && /[()]/.test(value)) {
+        throw new Error('Parentheses are not supported. AND takes precedence over OR.');
+      }
+      if (field && !["crag", "route", "grade"].includes(field)) {
+        throw new Error('Supported fields are crag:, route:, and grade:.');
+      }
+      if (!quoted && value.includes(":")) {
+        throw new Error('Check the field syntax, for example crag:avon or grade:7a.');
+      }
+      if (!value.trim() || (!quoted && !field && value === "-")) {
+        throw new Error('Enter a term after - or a field prefix.');
+      }
+      if (field === "grade" && !grades.includes(value)) {
+        throw new Error('Use an exact recognised grade, for example grade:7a or grade:7a+. Grade comparisons are not supported yet.');
+      }
+
+      groups[groups.length - 1].push({ field, value, excluded });
+      needsTerm = false;
+    }
+
+    if (needsTerm) {
+      throw new Error('Finish the search with a term, not AND or OR.');
+    }
+
+    return send => {
+      const fields = {
+        crag: String(send.gym_crag || "").toLowerCase(),
+        route: String(send.route || "").toLowerCase(),
+        grade: String(send.grade || "").toLowerCase()
+      };
+
+      return groups.some(group => group.every(term => {
+        // Phrase matching stays within a field, rather than crossing columns.
+        const matched = term.field === "grade"
+          ? fields.grade === term.value
+          : term.field
+            ? fields[term.field].includes(term.value)
+            : Object.values(fields).some(value => value.includes(term.value));
+
+        return term.excluded ? !matched : matched;
+      }));
+    };
+  }
+
+  let matchesSearch;
+  searchError.textContent = "";
+  searchError.hidden = true;
+  searchInput.removeAttribute("aria-invalid");
+
+  try {
+    matchesSearch = compileSearch(query);
+  } catch (error) {
+    searchError.textContent = error.message;
+    searchError.hidden = false;
+    searchInput.setAttribute("aria-invalid", "true");
+    matchesSearch = () => false;
+  }
+
+  const shown = [...sends]
+    .filter(send => !type || send.ascent_type === type)
+    .filter(send => !style || send.style === style)
+    .filter(matchesSearch)
+    .sort((a, b) => b.sent_on.localeCompare(a.sent_on));
+
+  const totalPages = Math.max(1, Math.ceil(shown.length / TABLE_PAGE_SIZE));
+  tablePage = Math.max(1, Math.min(tablePage, totalPages));
+
+  const startIndex = (tablePage - 1) * TABLE_PAGE_SIZE;
+  const paginatedSends = shown.slice(startIndex, startIndex + TABLE_PAGE_SIZE);
+
+  const pagination = $("#table-pagination");
+  const previousButton = $("#table-prev");
+  const nextButton = $("#table-next");
+  const pageStatus = $("#table-page-status");
+
+  pagination.hidden = shown.length <= TABLE_PAGE_SIZE;
+  previousButton.disabled = tablePage === 1;
+  nextButton.disabled = tablePage === totalPages;
+  pageStatus.textContent = `Page ${tablePage} of ${totalPages}`;
+
+  $("#send-rows").innerHTML = shown.length
+    ? paginatedSends.map(send => `
+      <tr>
+        <td>${formatDate(send.sent_on)}</td>
+        <td>${escapeHtml(send.gym_crag)}</td>
+        <td>${escapeHtml(send.route || "—")}</td>
+        <td>${send.grade}</td>
+        <td>${send.ascent_type}</td>
+        <td>${escapeHtml(send.style || "—")}</td>
+        <td>${sendScore(send).toFixed(0)}</td>
+        <td>
+          <span class="badge ${isValid(send) ? "valid" : "expired"}">
+            ${isValid(send) ? "Yes" : "No"}
+          </span>
+        </td>
+        <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
+      </tr>
+    `).join("")
+    : `<tr><td colspan="9">${searchError.hidden
+        ? "No sends match the filters."
+        : "Correct the search syntax to see matching sends."}</td></tr>`;
+
+  document.querySelectorAll(".edit").forEach(button => {
+    button.onclick = () => {
+      const send = sends.find(item => String(item.id) === button.dataset.id);
+      openDialog(send);
+    };
+  });
+}
 
   /* Destroy existing chart instances, then create fresh chart instances from current data. */
   function renderCharts(validSends) {
