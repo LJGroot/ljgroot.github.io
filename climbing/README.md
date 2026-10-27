@@ -10,7 +10,8 @@ This folder contains code (HTML/CSS, JavaScript, and SQL) for a progression dash
 - CSV import.
 - Send-log search supports exact grades (`grade:7a`), ordinal comparisons
   (`grade:>7a`, `grade:>=7a`, `grade:<7a`, `grade:<=7a`), and combining them
-  with the existing search operators.
+  with the existing search operators. `>` and `<` exclude the threshold grade;
+  `>=` and `<=` include it.
 - Dashboard with
   - highlight tiles:
     - number of valid sends, current level, hardest send, yearly goal
