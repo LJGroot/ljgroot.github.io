@@ -262,11 +262,24 @@ function renderTable() {
       if (!value.trim() || (!quoted && !field && value === "-")) {
         throw new Error('Enter a term after - or a field prefix.');
       }
-      if (field === "grade" && !grades.includes(value)) {
-        throw new Error('Use an exact recognised grade, for example grade:7a or grade:7a+. Grade comparisons are not supported yet.');
+      let gradeComparison = "";
+      let gradeValue = value;
+      if (field === "grade") {
+        const comparison = !quoted ? /^(>=|>|<=|<)(.+)$/.exec(value) : null;
+        gradeComparison = comparison ? comparison[1] : "";
+        gradeValue = comparison ? comparison[2] : value;
+
+        if (!grades.includes(gradeValue)) {
+          throw new Error('Use a recognised grade, for example grade:7a, grade:>=7a, or grade:<7a.');
+        }
       }
 
-      groups[groups.length - 1].push({ field, value, excluded });
+      groups[groups.length - 1].push({
+        field,
+        value: gradeValue,
+        comparison: gradeComparison,
+        excluded
+      });
       needsTerm = false;
     }
 
@@ -284,7 +297,20 @@ function renderTable() {
       return groups.some(group => group.every(term => {
         // Phrase matching stays within a field, rather than crossing columns.
         const matched = term.field === "grade"
-          ? fields.grade === term.value
+          ? (() => {
+              const sendGradeIndex = grades.indexOf(fields.grade);
+              const targetGradeIndex = grades.indexOf(term.value);
+
+              if (!term.comparison) return fields.grade === term.value;
+              if (sendGradeIndex < 0) return false;
+
+              return {
+                ">": sendGradeIndex > targetGradeIndex,
+                ">=": sendGradeIndex >= targetGradeIndex,
+                "<": sendGradeIndex < targetGradeIndex,
+                "<=": sendGradeIndex <= targetGradeIndex
+              }[term.comparison];
+            })()
           : term.field
             ? fields[term.field].includes(term.value)
             : Object.values(fields).some(value => value.includes(term.value));
