@@ -192,6 +192,19 @@ function renderTable() {
   const query = searchInput.value.trim();
   const type = $("#type-filter").value;
   const style = $("#style-filter").value;
+  const yearFilter = $("#year-filter");
+  const selectedYear = yearFilter.value;
+  const years = [...new Set(
+    sends
+      .map(send => String(send.sent_on || "").slice(0, 4))
+      .filter(year => /^\d{4}$/.test(year))
+  )].sort((a, b) => b.localeCompare(a));
+  yearFilter.replaceChildren(
+    new Option("All years", ""),
+    ...years.map(year => new Option(year, year))
+  );
+  yearFilter.value = years.includes(selectedYear) ? selectedYear : "";
+  const year = yearFilter.value;
 
   // Create a visible, accessible error message without editing the HTML.
   let searchError = $("#search-error");
@@ -337,6 +350,7 @@ function renderTable() {
   const shown = [...sends]
     .filter(send => !type || send.ascent_type === type)
     .filter(send => !style || send.style === style)
+    .filter(send => !year || String(send.sent_on || "").startsWith(`${year}-`))
     .filter(matchesSearch)
     .sort((a, b) => b.sent_on.localeCompare(a.sent_on));
 
@@ -797,8 +811,14 @@ function renderTable() {
 
     /* Return to the first table page whenever the style filter changes. */
     $("#style-filter").addEventListener("change", () => {
-    tablePage = 1;
-    renderTable();
+      tablePage = 1;
+      renderTable();
+    });
+
+    /* Return to the first table page whenever the year filter changes. */
+    $("#year-filter").addEventListener("change", () => {
+      tablePage = 1;
+      renderTable();
     });
 
     /* Attach pagination listeners once during app initialisation. */
