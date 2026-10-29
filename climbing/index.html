@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 </head>
-<body class="read-only">
+<body>
   <header>
     <a class="site-name" href="https://ljgroot.github.io/">Lennert J. Groot</a>
     <nav>
@@ -110,17 +110,7 @@
 
       <section class="card">
         <div class="section-heading">
-          <div>
-            <h2>Send log</h2>
-          </div>
-
-          <div class="button-row">
-            <label class="file-button">
-              Import CSV
-              <input id="csv-import" type="file" accept=".csv,text/csv">
-            </label>
-            <button id="new-send">Add send</button>
-          </div>
+          <h2>Send log</h2>
         </div>
 
         <div class="filters">
@@ -150,7 +140,6 @@
                 <th>Style</th>
                 <th>Score</th>
                 <th>Valid</th>
-                <th></th>
               </tr>
             </thead>
             <tbody id="send-rows"></tbody>
@@ -166,61 +155,6 @@
       </section>
     </section>
   </main>
-
-  <dialog id="send-dialog">
-    <form id="send-form">
-      <div class="dialog-head">
-        <h2 id="dialog-title">Add send</h2>
-        <button id="close-dialog" type="button" class="icon" aria-label="Close">×</button>
-      </div>
-
-      <input id="send-id" type="hidden">
-
-      <label>
-        Date
-        <input id="sent-on" type="date" required>
-      </label>
-
-      <label>
-        Gym / crag
-        <input id="gym-crag" required>
-      </label>
-
-      <label>
-        Route
-        <input id="route">
-      </label>
-
-      <label>
-        Grade
-        <select id="grade" required></select>
-      </label>
-
-      <label>
-        Ascent type
-        <select id="ascent-type" required>
-          <option value="RP">RP</option>
-          <option value="FL">FL</option>
-          <option value="OS">OS</option>
-        </select>
-      </label>
-
-      <label>
-        Style
-        <select id="style" required>
-        <option value="TR">Top rope (TR)</option>
-        <option value="LD">Lead (LD)</option>
-        </select>
-      </label>
-
-      <div class="dialog-actions">
-        <button id="cancel-dialog" type="button" class="secondary">Cancel</button>
-        <button type="submit">Save send</button>
-      </div>
-
-      <p id="form-message" role="status"></p>
-    </form>
-  </dialog>
 
   <footer>© 2026 L.J. Groot</footer>
 

@@ -43,7 +43,7 @@
   let sends = [];
   let charts = [];
 
-  /* Public climbing.html sets this global boolean; admin.html does not. */
+  /* The public index page sets this global boolean; admin.html does not. */
   const readOnly = window.CLIMBING_READ_ONLY === true;
 
   /* Return a grade score plus the bonus associated with ascent type. */
@@ -371,19 +371,21 @@ function renderTable() {
             ${isValid(send) ? "Yes" : "No"}
           </span>
         </td>
-        <td><button class="secondary edit" data-id="${send.id}">Edit</button></td>
+        ${readOnly ? "" : `<td><button class="secondary edit" data-id="${send.id}">Edit</button></td>`}
       </tr>
     `).join("")
-    : `<tr><td colspan="9">${searchError.hidden
+    : `<tr><td colspan="${readOnly ? 8 : 9}">${searchError.hidden
         ? "No sends match the filters."
         : "Correct the search syntax to see matching sends."}</td></tr>`;
 
-  document.querySelectorAll(".edit").forEach(button => {
-    button.onclick = () => {
-      const send = sends.find(item => String(item.id) === button.dataset.id);
-      openDialog(send);
-    };
-  });
+  if (!readOnly) {
+    document.querySelectorAll(".edit").forEach(button => {
+      button.onclick = () => {
+        const send = sends.find(item => String(item.id) === button.dataset.id);
+        openDialog(send);
+      };
+    });
+  }
 }
 
   /* Destroy existing chart instances, then create fresh chart instances from current data. */
@@ -713,10 +715,12 @@ function renderTable() {
 
   /* Configure controls, create the Supabase client, and initialise public or admin access. */
   async function initialise() {
-    /* Build the grade dropdown from the shared grades array. */
-    $("#grade").innerHTML = grades.map(grade =>
-      `<option value="${grade}">${grade}</option>`
-    ).join("");
+    if (!readOnly) {
+      /* Build the grade dropdown from the shared grades array. */
+      $("#grade").innerHTML = grades.map(grade =>
+        `<option value="${grade}">${grade}</option>`
+      ).join("");
+    }
 
     if (!configured) {
       $("#setup").classList.remove("hidden");
@@ -766,11 +770,7 @@ function renderTable() {
       location.reload();
     };
 
-    if (readOnly) {
-      /* Hide controls that write to the private sends table. */
-      $("#new-send").style.display = "none";
-      document.querySelector(".file-button").style.display = "none";
-    } else {
+    if (!readOnly) {
       /* Attach the two admin-only data-entry controls. */
       $("#new-send").onclick = () => openDialog();
       $("#csv-import").onchange = async event => {
@@ -778,11 +778,10 @@ function renderTable() {
         if (file) await importCsv(file);
         event.target.value = "";
       };
+      /* Both dialog-close controls perform the same close() operation. */
+      $("#close-dialog").onclick = () => $("#send-dialog").close();
+      $("#cancel-dialog").onclick = () => $("#send-dialog").close();
     }
-
-    /* Both dialog-close controls perform the same close() operation. */
-    $("#close-dialog").onclick = () => $("#send-dialog").close();
-    $("#cancel-dialog").onclick = () => $("#send-dialog").close();
 
     /* Reset pagination whenever a input in the search box, then redraw only the table. */
     $("#search").addEventListener("input", () => {
@@ -815,32 +814,34 @@ function renderTable() {
       renderTable();
     });
 
-    /* Assemble the form data, then update an existing row or insert a new one. */
-    $("#send-form").onsubmit = async event => {
-      event.preventDefault();
+    if (!readOnly) {
+      /* Assemble the form data, then update an existing row or insert a new one. */
+      $("#send-form").onsubmit = async event => {
+        event.preventDefault();
 
-      const id = $("#send-id").value;
-      const item = {
-        sent_on: $("#sent-on").value,
-        gym_crag: $("#gym-crag").value.trim(),
-        route: $("#route").value.trim(),
-        grade: $("#grade").value,
-        ascent_type: $("#ascent-type").value,
-        style: $("#style").value
+        const id = $("#send-id").value;
+        const item = {
+          sent_on: $("#sent-on").value,
+          gym_crag: $("#gym-crag").value.trim(),
+          route: $("#route").value.trim(),
+          grade: $("#grade").value,
+          ascent_type: $("#ascent-type").value,
+          style: $("#style").value
+        };
+
+        const result = id
+          ? await supabase.from("sends").update(item).eq("id", id)
+          : await supabase.from("sends").insert(item);
+
+        if (result.error) {
+          $("#form-message").textContent = result.error.message;
+          return;
+        }
+
+        $("#send-dialog").close();
+        await loadSends();
       };
-
-      const result = id
-        ? await supabase.from("sends").update(item).eq("id", id)
-        : await supabase.from("sends").insert(item);
-
-      if (result.error) {
-        $("#form-message").textContent = result.error.message;
-        return;
-      }
-
-      $("#send-dialog").close();
-      await loadSends();
-    };
+    }
   }
 
   /* Start application setup after this JavaScript file has loaded. */
