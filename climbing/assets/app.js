@@ -487,8 +487,8 @@ function renderTable() {
 
     /* Each ascent type has a short legend key and a colour. */
     const ascentTypes = [
-      { key: "RP", label: "RP", color: "#0d6b64" },
-      { key: "FL", label: "FL", color: "#8dbdb3" },
+      { key: "RP", label: "RP", color: "#19cabe" },
+      { key: "FL", label: "FL", color: "#1966be" },
       { key: "OS", label: "OS", color: "#e8b766" }
     ];
 
