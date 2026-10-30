@@ -577,25 +577,14 @@ function renderTable() {
       }
     }));
 
-    /* Define the two valid-send-by-grade datasets. */
-    const styles = [
-      {
-        key: "LD",
-        label: "LD",
-        backgroundColor: stripedPattern("#8dbdb3"),
-        borderColor: "#5f9f94"
-      },
-      {
-        key: "TR",
-        label: "TR",
-        backgroundColor: "#8dbdb3",
-        borderColor: "#5f9f94"
-      }
-    ];
-
-    /* Initialise grade -> style counters to zero. */
-    const gradeStyleCounts = Object.fromEntries(
-      grades.map(grade => [grade, { LD: 0, TR: 0 }])
+    /* Initialise grade -> ascent type -> style counters to zero. */
+    const gradeSendCounts = Object.fromEntries(
+      grades.map(grade => [
+        grade,
+        Object.fromEntries(
+          ascentTypes.map(ascentType => [ascentType.key, { LD: 0, TR: 0 }])
+        )
+      ])
     );
 
     /* This chart deliberately counts only sends that are still valid. */
@@ -603,25 +592,34 @@ function renderTable() {
       const style = send.style || "TR";
 
       if (
-        gradeStyleCounts[send.grade] &&
-        gradeStyleCounts[send.grade][style] !== undefined
+        gradeSendCounts[send.grade] &&
+        gradeSendCounts[send.grade][send.ascent_type] &&
+        gradeSendCounts[send.grade][send.ascent_type][style] !== undefined
       ) {
-        gradeStyleCounts[send.grade][style]++;
+        gradeSendCounts[send.grade][send.ascent_type][style]++;
       }
     });
+
+    const gradeDatasets = ascentTypes.flatMap(ascentType =>
+      ropeStyles.map(ropeStyle => ({
+        label: `${ascentType.label} · ${ropeStyle.label}`,
+        data: grades.map(
+          grade => gradeSendCounts[grade][ascentType.key][ropeStyle.key]
+        ),
+        backgroundColor: ropeStyle.key === "LD"
+          ? stripedPattern(ascentType.color)
+          : ascentType.color,
+        borderColor: ascentType.color,
+        borderWidth: 1
+      }))
+    );
 
     /* Build and save the stacked valid-sends-by-grade chart. */
     charts.push(new Chart($("#grade-chart"), {
       type: "bar",
       data: {
         labels: grades,
-        datasets: styles.map(style => ({
-          label: style.label,
-          data: grades.map(grade => gradeStyleCounts[grade][style.key]),
-          backgroundColor: style.backgroundColor,
-          borderColor: style.borderColor,
-          borderWidth: 1
-        }))
+        datasets: gradeDatasets
       },
       options: {
         responsive: true,
