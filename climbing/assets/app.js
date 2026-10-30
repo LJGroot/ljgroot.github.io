@@ -487,9 +487,9 @@ function renderTable() {
 
     /* Each ascent type has a short legend key and a colour. */
     const ascentTypes = [
-      { key: "RP", label: "RP", color: "#2dcec3" },
-      { key: "FL", label: "FL", color: "#488ad5" },
-      { key: "OS", label: "OS", color: "#e8b766" }
+      { key: "RP", label: "RP", color: "#0072B2" },
+      { key: "FL", label: "FL", color: "#D55E00" },
+      { key: "OS", label: "OS", color: "#009E73" }
     ];
 
     /* Lead uses stripes; top rope uses solid fills. */
