@@ -39,6 +39,11 @@ This folder contains code (HTML/CSS, JavaScript, and SQL) for a progression dash
 
 ## Setup
 
+### 0. Create a location to host the dashboard
+
+If you don't have a domain to host the dashboard, the easiest way to do this is by creating a GitHub pages website.
+You can do this by creating a new repository called [username].github.io in your GitHub repositories page.
+
 ### 1. Create a Supabase project
 
 Create a project at https://supabase.com.
@@ -78,7 +83,7 @@ Set:
     
 Add this Redirect URL:
     
-    https://[username].github.io/climbing/
+    https://[username].github.io/
     
 ### 5. Add the project credentials
 
