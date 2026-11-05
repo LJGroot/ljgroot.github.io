@@ -89,4 +89,4 @@ from pg_class
 where relname = 'sends';
 
 grant usage on schema public to authenticated;
-grant select, insert, update on table public.sends to authenticated;
+grant select, insert, update, delete on table public.sends to authenticated;

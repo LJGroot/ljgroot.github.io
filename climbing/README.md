@@ -7,6 +7,7 @@ This folder contains code (HTML/CSS, JavaScript, and SQL) for a progression dash
 - Sign-in screen using Supabase Auth.
 - Private cloud database.
 - Add and edit sends.
+- Delete sends from the admin edit form after confirmation.
 - CSV import.
 - Send-log search supports exact grades (`grade:7a`), ordinal comparisons
   (`grade:>7a`, `grade:>=7a`, `grade:<7a`, `grade:<=7a`), and combining them
@@ -55,6 +56,12 @@ Open:
     SQL Editor → New query
     
 Copy the entire contents of `supabase-schema.sql`, paste it, and run it.
+
+If the table is already set up, run this once to enable deletes for signed-in users:
+
+```sql
+grant delete on table public.sends to authenticated;
+```
 
 ### 3. Create your account and password
 
@@ -142,7 +149,7 @@ If the page was deployed in the root folder, the page will be available at:
 
 ## Privacy
 
-The website files themselves do not contain your climbing data. The data is stored in Supabase and protected by Row-Level Security, so only your signed-in account can add or update sends.
+The website files themselves do not contain your climbing data. The data is stored in Supabase and protected by Row-Level Security, so only your signed-in account can add, update, or delete sends.
 
 ## Note on filtering in dashboard tiles and grade pyramid
 

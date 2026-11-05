@@ -118,6 +118,13 @@ button.secondary {
   background: #e7ece9;
 }
 
+button.danger {
+  margin-right: auto;
+  background: #a12622;
+}
+
+button.danger:hover { background: #7e1d1a; }
+
 .file-button input { display: none; }
 
 .title-row,

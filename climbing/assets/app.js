@@ -654,6 +654,8 @@ function renderTable() {
     $("#ascent-type").value = send?.ascent_type || "RP";
     $("#style").value = send?.style || "TR";
     $("#form-message").textContent = "";
+    $("#delete-send").disabled = false;
+    $("#delete-send").classList.toggle("hidden", !send);
     $("#send-dialog").showModal();
   }
 
@@ -793,6 +795,28 @@ function renderTable() {
       /* Both dialog-close controls perform the same close() operation. */
       $("#close-dialog").onclick = () => $("#send-dialog").close();
       $("#cancel-dialog").onclick = () => $("#send-dialog").close();
+      $("#delete-send").onclick = async () => {
+        const id = $("#send-id").value;
+        const send = sends.find(item => String(item.id) === id);
+
+        if (!id || !send) return;
+
+        const description = `${send.route || "Unnamed route"} at ${send.gym_crag} on ${formatDate(send.sent_on)}`;
+        if (!window.confirm(`Delete ${description}? This cannot be undone.`)) return;
+
+        const button = $("#delete-send");
+        button.disabled = true;
+        const { error } = await supabase.from("sends").delete().eq("id", id);
+
+        if (error) {
+          $("#form-message").textContent = error.message;
+          button.disabled = false;
+          return;
+        }
+
+        $("#send-dialog").close();
+        await loadSends();
+      };
     }
 
     /* Reset pagination whenever a input in the search box, then redraw only the table. */
