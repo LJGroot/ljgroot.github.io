@@ -688,6 +688,14 @@ function renderTable() {
     $("#send-dialog").showModal();
   }
 
+  function openGoalDialog() {
+    $("#goal-dialog-title").textContent = `Set ${currentYear} goal`;
+    $("#goal-target").value = yearlyGoal;
+    $("#goal-form-message").textContent = "";
+    $("#save-goal").disabled = false;
+    $("#goal-dialog").showModal();
+  }
+
   /* Parse the application's simple comma-separated import format. */
   function parseCsv(text) {
     const lines = text.trim().split(/\r?\n/);
