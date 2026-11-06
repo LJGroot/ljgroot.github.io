@@ -27,8 +27,12 @@
   /* Number of rows rendered on each table page. */
   const TABLE_PAGE_SIZE = 30;
 
+  const currentYear = new Date().getFullYear();
+  const DEFAULT_YEARLY_GOAL = 16;
+
   /* Mutable state for the currently selected one-based table page number. */
   let tablePage = 1;
+  let yearlyGoal = DEFAULT_YEARLY_GOAL;
 
   /*
     Create an object such as { "5a": 500, "5a+": 516.666..., ... }.
@@ -85,6 +89,14 @@
       }
     }
 
+    function openGoalDialog() {
+      $("#goal-dialog-title").textContent = `Set ${currentYear} goal`;
+      $("#goal-target").value = yearlyGoal;
+      $("#goal-form-message").textContent = "";
+      $("#save-goal").disabled = false;
+      $("#goal-dialog").showModal();
+    }
+
     return bestGrade;
   }
 
@@ -139,6 +151,22 @@
     render();
   }
 
+  async function loadYearlyGoal() {
+    const viewName = readOnly ? "public_yearly_goals" : "yearly_goals";
+    const { data, error } = await supabase
+      .from(viewName)
+      .select("target")
+      .eq("year", currentYear)
+      .maybeSingle();
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    yearlyGoal = data?.target ?? DEFAULT_YEARLY_GOAL;
+  }
+
   /* Calculate summary values, then redraw the table and all charts. */
   function render() {
     const validSends = sends.filter(isValid);
@@ -164,9 +192,9 @@
       grades.indexOf(send.grade) >= grades.indexOf("7a")
     ).length;
 
-    /* Count 7a-and-harder sends recorded in 2026 for the annual goal. */
+    /* Count 7a-and-harder sends recorded in the current calendar year. */
     const goalCount = sends.filter(send =>
-      send.sent_on.startsWith("2026") &&
+      send.sent_on.startsWith(`${currentYear}-`) &&
       grades.indexOf(send.grade) >= grades.indexOf("7a")
     ).length;
 
@@ -180,7 +208,8 @@
       ? `${hardest.route || "Unnamed route"} · ${hardest.gym_crag}`
       : "";
     $("#hard-send-count").textContent = hardSendCount;
-    $("#goal-progress").textContent = `${goalCount} / 16`;
+    $("#goal-year").textContent = `${currentYear} Goal Progress`;
+    $("#goal-progress").textContent = `${goalCount} / ${yearlyGoal}`;
 
     renderTable();
     renderCharts(validSends);
@@ -724,6 +753,7 @@ function renderTable() {
       $("#sign-out").style.display = "";
     }
 
+    await loadYearlyGoal();
     await loadSends();
   }
 
@@ -787,6 +817,34 @@ function renderTable() {
     if (!readOnly) {
       /* Attach the two admin-only data-entry controls. */
       $("#new-send").onclick = () => openDialog();
+      $("#edit-goal").onclick = openGoalDialog;
+      $("#close-goal-dialog").onclick = () => $("#goal-dialog").close();
+      $("#cancel-goal-dialog").onclick = () => $("#goal-dialog").close();
+      $("#goal-form").onsubmit = async event => {
+        event.preventDefault();
+
+        const target = Number($("#goal-target").value);
+        if (!Number.isInteger(target) || target < 1) {
+          $("#goal-form-message").textContent = "Enter a whole number greater than zero.";
+          return;
+        }
+
+        $("#save-goal").disabled = true;
+        const { error } = await supabase.from("yearly_goals").upsert(
+          { year: currentYear, target },
+          { onConflict: "user_id,year" }
+        );
+
+        if (error) {
+          $("#goal-form-message").textContent = error.message;
+          $("#save-goal").disabled = false;
+          return;
+        }
+
+        yearlyGoal = target;
+        $("#goal-dialog").close();
+        render();
+      };
       $("#csv-import").onchange = async event => {
         const file = event.target.files[0];
         if (file) await importCsv(file);

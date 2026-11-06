@@ -72,7 +72,10 @@
         </article>
 
         <article>
-          <span>2026 Goal Progress</span>
+          <div class="goal-heading">
+            <span id="goal-year"></span>
+            <button id="edit-goal" type="button" class="secondary">Edit goal</button>
+          </div>
           <strong id="goal-progress">–</strong>
           <small>7a or harder</small>
         </article>
@@ -234,6 +237,26 @@
         <button type="submit">Save send</button>
       </div>
       <p id="form-message" role="status"></p>
+    </form>
+  </dialog>
+
+  <dialog id="goal-dialog">
+    <form id="goal-form">
+      <div class="dialog-head">
+        <h2 id="goal-dialog-title">Set yearly goal</h2>
+        <button id="close-goal-dialog" type="button" class="icon" aria-label="Close">×</button>
+      </div>
+
+      <label>
+        Number of 7a-or-harder sends
+        <input id="goal-target" type="number" min="1" step="1" required>
+      </label>
+
+      <div class="dialog-actions">
+        <button id="cancel-goal-dialog" type="button" class="secondary">Cancel</button>
+        <button id="save-goal" type="submit">Save goal</button>
+      </div>
+      <p id="goal-form-message" role="status"></p>
     </form>
   </dialog>
 

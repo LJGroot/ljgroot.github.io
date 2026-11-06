@@ -63,6 +63,42 @@ If the table is already set up, run this once to enable deletes for signed-in us
 grant delete on table public.sends to authenticated;
 ```
 
+For an existing setup, also run this once to enable yearly goal tracking:
+
+```sql
+create table if not exists public.yearly_goals (
+  user_id uuid not null default auth.uid()
+    references auth.users(id) on delete cascade,
+  year integer not null check (year >= 2000),
+  target integer not null check (target > 0),
+  primary key (user_id, year)
+);
+
+alter table public.yearly_goals enable row level security;
+
+create policy "Users can view their own yearly goals"
+on public.yearly_goals for select to authenticated
+using ((select auth.uid()) = user_id);
+
+create policy "Users can add their own yearly goals"
+on public.yearly_goals for insert to authenticated
+with check ((select auth.uid()) = user_id);
+
+create policy "Users can update their own yearly goals"
+on public.yearly_goals for update to authenticated
+using ((select auth.uid()) = user_id)
+with check ((select auth.uid()) = user_id);
+
+grant select, insert, update on table public.yearly_goals to authenticated;
+
+create or replace view public.public_yearly_goals as
+select year, target
+from public.yearly_goals;
+
+grant select on public.public_yearly_goals to anon, authenticated;
+grant usage on schema public to anon, authenticated;
+```
+
 ### 3. Create your account and password
 
 Go to:

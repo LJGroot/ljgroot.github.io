@@ -53,6 +53,35 @@ for delete
 to authenticated
 using ((select auth.uid()) = user_id);
 
+create table if not exists public.yearly_goals (
+  user_id uuid not null default auth.uid()
+    references auth.users(id) on delete cascade,
+  year integer not null check (year >= 2000),
+  target integer not null check (target > 0),
+  primary key (user_id, year)
+);
+
+alter table public.yearly_goals enable row level security;
+
+create policy "Users can view their own yearly goals"
+on public.yearly_goals
+for select
+to authenticated
+using ((select auth.uid()) = user_id);
+
+create policy "Users can add their own yearly goals"
+on public.yearly_goals
+for insert
+to authenticated
+with check ((select auth.uid()) = user_id);
+
+create policy "Users can update their own yearly goals"
+on public.yearly_goals
+for update
+to authenticated
+using ((select auth.uid()) = user_id)
+with check ((select auth.uid()) = user_id);
+
 
 -- create duplicate public read only version
 create or replace view public.public_sends as
@@ -68,6 +97,12 @@ from public.sends;
 
 grant select on public.public_sends to anon, authenticated;
 
+create or replace view public.public_yearly_goals as
+select year, target
+from public.yearly_goals;
+
+grant select on public.public_yearly_goals to anon, authenticated;
+
 -- check policies
 select
   schemaname,
@@ -79,7 +114,7 @@ select
   with_check
 from pg_policies
 where schemaname = 'public'
-  and tablename in ('sends', 'public_sends')
+  and tablename in ('sends', 'public_sends', 'yearly_goals')
 order by tablename, cmd, policyname;
 
 select
@@ -88,5 +123,6 @@ select
 from pg_class
 where relname = 'sends';
 
-grant usage on schema public to authenticated;
+grant usage on schema public to anon, authenticated;
 grant select, insert, update, delete on table public.sends to authenticated;
+grant select, insert, update on table public.yearly_goals to authenticated;
