@@ -185,7 +185,7 @@ If the page was deployed in the root folder, the page will be available at:
 
 ## Privacy
 
-The website files themselves do not contain your climbing data. The data is stored in Supabase and protected by Row-Level Security, so only your signed-in account can add, update, or delete sends.
+The website files themselves do not contain your climbing data. The data is stored in Supabase. Only your signed-in account can add, update, or delete sends. The public dashboard intentionally makes the send date, gym/crag, route, grade, ascent type, and style visible to anyone; it does not expose the associated user ID.
 
 ## Note on filtering in dashboard tiles and grade pyramid
 

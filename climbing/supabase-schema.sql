@@ -83,8 +83,10 @@ using ((select auth.uid()) = user_id)
 with check ((select auth.uid()) = user_id);
 
 
--- create duplicate public read only version
-create or replace view public.public_sends as
+-- Public dashboard view: expose send details without exposing user_id.
+-- The view owner bypasses sends-table RLS so anonymous visitors can read rows.
+create or replace view public.public_sends
+with (security_invoker = false) as
 select
   id,
   gym_crag,
