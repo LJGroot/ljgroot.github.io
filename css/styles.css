@@ -124,19 +124,32 @@ nav a.active {
         display: block;       /* show button on small screens */
     }
 
-    nav {
+    .nav-container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .nav-container nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         display: none;        /* hide nav by default */
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
+        background-color: rgba(255, 255, 255, 0.68);
+        border-bottom: 1px solid rgba(238, 238, 238, 0.6);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(12px);
     }
 
-    nav.open {
+    .nav-container nav.open {
         display: flex;        /* show when toggled */
     }
 
-    nav a {
+    .nav-container nav a {
         flex: 0 0 auto;
         font-size: 0.95rem;
         padding: 0.25rem 0.5rem;
@@ -180,6 +193,10 @@ header {
     margin: 2rem auto 0;
     padding: 1rem;
     text-align: center;
+}
+
+.container.contact-page {
+    width: min(100%, 800px);
 }
 
 /* Landing page-specific portrait styling override */
@@ -243,60 +260,59 @@ header {
 /* Contact Page Specific */
 .contact-links {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1rem;
+    text-align: left;
 }
 
 .contact-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 7rem;
+    padding: 1.25rem 3.25rem 1.25rem 1.25rem;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-card);
+    color: var(--color-primary);
+    text-decoration: none;
+    box-shadow: var(--shadow-soft);
+    transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .contact-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    color: var(--color-secondary);
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 117, 252, 0.14);
 }
 
-.contact-link a {
-    color: #6a11cb;
-    text-decoration: none;
+.contact-link-title {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
-/* Contact page button layout */
-.button-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
+.contact-link-description {
+    margin-top: 0.35rem;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
-.contact-button {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    color: white;
-    background-color: #2575fc;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.contact-link-arrow {
+    position: absolute;
+    top: 50%;
+    right: 1.25rem;
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    transform: translateY(-50%);
 }
 
-.contact-button:hover {
-    background-color: #6a11cb;
-    transform: translateY(-3px);
-}
-
-.contact-button:active {
-    transform: translateY(1px);
+.contact-intro {
+    margin: -0.5rem 0 1.5rem;
+    color: #555;
+    line-height: 1.6;
 }
 
 /* Grid Containers */
@@ -516,8 +532,7 @@ p {
 /* ============================= */
 
 nav a,
-.contact-link,
-.contact-button {
+.contact-link {
     transition:
         color 0.2s ease,
         background-color 0.2s ease,
@@ -537,14 +552,7 @@ nav a.active {
     border-bottom: 2px solid currentColor;
 }
 
-/* Contact cards: softer hover */
-.contact-link:hover {
-    background-color: #f9fafb;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-/* Buttons: focus-visible for keyboard users */
-.contact-button:focus-visible {
+.contact-link:focus-visible {
     outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
 }
